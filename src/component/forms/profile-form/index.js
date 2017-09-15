@@ -19,8 +19,26 @@ class ProfileForm extends React.component{
   handleChange(e){
     let {type, name} = e.target;
 
-    if(name ==='bio'){
-      this.setState({bio: e.target.value})
+    if(name ==='userName'){
+      this.setState({userName: e.target.value})
+    }
+    if(name ==='password'){
+      this.setState({password: e.target.value})
+    }
+    if(name ==='Email'){
+      this.setState({Email: e.target.value})
+    }
+    if(name ==='exp'){
+      this.setState({exp: e.target.value})
+    }
+    if(name ==='weight'){
+      this.setState({weight: e.target.value})
+    }
+    if(name ==='firstName'){
+      this.setState({firstName: e.target.value})
+    }
+    if(name ==='lastName'){
+      this.setState({lastName: e.target.value})
     }
 
     if(name === 'avatar'){
@@ -41,7 +59,7 @@ class ProfileForm extends React.component{
     return(
       <form
         className='profile-form'
-        onSubmit='{this.submitChange}'
+        onSubmit={this.submitChange}
       />
 
       <img src={this.state.preview || this.state.avatar} />
@@ -64,7 +82,7 @@ class ProfileForm extends React.component{
       <p className='profile-field-desc'>Enter in your: Password</p>
       <input
         type='text'
-        name='Password'
+        name='password'
         placeholder='enter password'
         value={this.state.password}
         onChange={this.handleChange}
