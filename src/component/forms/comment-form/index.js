@@ -2,6 +2,7 @@ import React from 'react'
 import superagent from 'superagent'
 import debounce from 'lodash/fp/debounce'
 
+import Tooltip from '../tooltip'
 import * as util from '../../lib/util.js'
 
 class CommentRoute extends React.Component{
@@ -168,4 +169,70 @@ class CommentRoute extends React.Component{
     }))
   }
 
+  render(){
+    let {
+      focused,
+      submitted,
+      edibleName,
+      titleError,
+      commentBodyError,
+      edibleNameError,
+      edibleExists
+    } = this.state
+    return(
+      <form onSubmit={this.handleSubmit}>
+        <Tooltip message={edibleNameError} show={focused === 'edibleName' || submitted} />
+        <input
+          className={util.classToggler({error: edibleNameError})}
+          type='text'
+          name='edibleName'
+          placeholder='edibleName'
+          value={this.state.edibleName}
+          onChange={this.handleChange}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+          />
+
+        <Tooltip message={titleError} show={focused === 'title' || submitted} />
+        <input
+          className={util.classToggler({error: titleError})}
+          type='text'
+          name='title'
+          placeholder='title'
+          value={this.state.title}
+          onChange={this.handleChange}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+          />
+
+        <Tooltip message={commentBodyError} show={focused === 'commentBody' || submitted} />
+        <textarea
+          className={util.classToggler({error: commentBodyError})}
+          type='text'
+          name='commentBody'
+          placeholder='commentBody'
+          value={this.state.commentBody}
+          onChange={this.handleChange}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}>
+        </textarea>
+
+        <div className='exp-review-rating-radio'>
+          <h2>How would you rate your experience?</h2>
+          <Rating
+            name='effectRelaxed'
+            low='not relaxed'
+            high='excellent'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.reaction}
+          />
+        </div>
+
+
+
+      </form>
+    )
+  }
 }
