@@ -218,15 +218,67 @@ class CommentRoute extends React.Component{
         </textarea>
 
         <div className='exp-review-rating-radio'>
-          <h2>How would you rate your experience?</h2>
+          <h2>How relaxed did you feel when using edible?</h2>
           <Rating
             name='effectRelaxed'
             low='not relaxed'
-            high='excellent'
+            high='very relaxed'
             min={1}
             max={5}
             onChange={this.handleChange}
-            value={this.state.reaction}
+            value={this.state.effectRelaxed}
+          />
+        </div>
+
+        <div className='exp-review-rating-radio'>
+          <h2>How happy did you feel when using edible?</h2>
+          <Rating
+            name='effectHappy'
+            low='not happy'
+            high='very happy'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.effectHappy}
+          />
+        </div>
+
+        <div className='exp-review-rating-radio'>
+          <h2>How euphoric did you feel when using edible?</h2>
+          <Rating
+            name='effectEuphoric'
+            low='not euphoric'
+            high='very euphoric'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.effectEuphoric}
+          />
+        </div>
+
+        <div className='exp-review-rating-radio'>
+          <h2>How uplifted did you feel when using edible?</h2>
+          <Rating
+            name='effectUplifted'
+            low='not uplifted'
+            high='very uplifted'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.effectUplifted}
+          />
+        </div>
+
+        <div className='exp-review-rating-radio'>
+          <h2>How creative did you feel when using edible?</h2>
+          <Rating
+            name='effectCreative'
+            low='not creative'
+            high='very creative'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.effectCreative}
           />
         </div>
 
