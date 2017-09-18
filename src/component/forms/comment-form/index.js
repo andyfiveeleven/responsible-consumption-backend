@@ -1,11 +1,12 @@
 import React from 'react'
 import superagent from 'superagent'
 import debounce from 'lodash/fp/debounce'
+import Rating from '../../rating/index'
 
-import Tooltip from '../tooltip'
-import * as util from '../../lib/util.js'
+import Tooltip from '../../tooltip/index'
+import * as util from '../../../lib/util'
 
-class CommentForm extends React.Component{
+class CommentForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -41,7 +42,6 @@ class CommentForm extends React.Component{
       focused: null,
     }
     this.validateInput = this.validateInput.bind(this)
-    this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleFocus = this.handleFocus.bind(this)
@@ -103,16 +103,23 @@ class CommentForm extends React.Component{
   }
 
   handleChange(e){
+    console.log('EVENT',e);
     let {name, value} = e.target
     this.validateInput({...e})
 
-    this.setState({
-      [name]: value,
-    })
+    console.log(name);
+
 
     if(name === 'edibleName'){
       this.edibleDoesExist(value)
     }
+
+    if(name === 'effectRelaxed'){
+      this.setState({ effectRelaxed })
+    }
+    this.setState({
+      [name]: value,
+    })
   }
 
   edibleDoesExist(edibleName){
@@ -220,12 +227,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>How relaxed did you feel when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='effectRelaxed'
             low='not relaxed'
             high='very relaxed'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(effectRelaxed) => this.setState({ effectRelaxed })}
             value={this.state.effectRelaxed}
           />
         </div>
@@ -233,12 +245,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>How happy did you feel when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='effectHappy'
             low='not happy'
             high='very happy'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(effectHappy) => this.setState({ effectHappy })}
             value={this.state.effectHappy}
           />
         </div>
@@ -246,12 +263,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>How euphoric did you feel when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='effectEuphoric'
             low='not euphoric'
             high='very euphoric'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(effectEuphoric) => this.setState({ effectEuphoric })}
             value={this.state.effectEuphoric}
           />
         </div>
@@ -259,12 +281,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>How uplifted did you feel when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='effectUplifted'
             low='not uplifted'
             high='very uplifted'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(effectUplifted) => this.setState({ effectUplifted })}
             value={this.state.effectUplifted}
           />
         </div>
@@ -272,12 +299,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>How creative did you feel when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='effectCreative'
             low='not creative'
             high='very creative'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(effectCreative) => this.setState({ effectCreative })}
             value={this.state.effectCreative}
           />
         </div>
@@ -285,12 +317,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>Did you have stress relief when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='medicalStress'
             low='very stressed'
             high='not stressed'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(medicalStress) => this.setState({ medicalStress })}
             value={this.state.medicalStress}
           />
         </div>
@@ -298,12 +335,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>Did you have pain relief when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='medicalPain'
             low='had pain'
             high='no pain'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(medicalPain) => this.setState({ medicalPain })}
             value={this.state.medicalPain}
           />
         </div>
@@ -311,12 +353,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>Did you have headache relief when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='medicalHeadaches'
             low='had headache'
             high='no headache'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(medicalHeadaches) => this.setState({ medicalHeadaches })}
             value={this.state.medicalHeadaches}
           />
         </div>
@@ -324,12 +371,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>Did you have insomnia relief when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='medicalInsomnia'
             low='had insomnia'
             high='no insomnia'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(medicalInsomnia) => this.setState({ medicalInsomnia })}
             value={this.state.medicalInsomnia}
           />
         </div>
@@ -337,12 +389,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>Did you have a dry mouth when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='negativeDryMouth'
             low='no dry mouth'
             high='had dry mouth'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(negativeDryMouth) => this.setState({ negativeDryMouth })}
             value={this.state.negativeDryMouth}
           />
         </div>
@@ -350,12 +407,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>Did you have dry eyes when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='negativeDryEyes'
             low='no dry eyes'
             high='had dry eyes'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(negativeDryEyes) => this.setState({ negativeDryEyes })}
             value={this.state.negativeDryEyes}
           />
         </div>
@@ -363,12 +425,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>Did you have paranoia when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='negativeParanoid'
             low='no paranoia'
             high='had paranoia'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(negativeParanoid) => this.setState({ negativeParanoid })}
             value={this.state.negativeParanoid}
           />
         </div>
@@ -376,12 +443,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>Did you have dizzyness when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='negativeDizzy'
             low='no dizzyness'
             high='had dizzyness'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(negativeDizzy) => this.setState({ negativeDizzy })}
             value={this.state.negativeDizzy}
           />
         </div>
@@ -389,12 +461,17 @@ class CommentForm extends React.Component{
         <div className='exp-review-rating-radio'>
           <h2>Did you have anxiousness when using this edible?</h2>
           <Rating
+            label1 = '1'
+            label2 = '2'
+            label3 = '3'
+            label4 = '4'
+            label5 = '5'
             name='negativeAnxious'
             low='no anxiousness'
             high='had anxiousness'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(negativeAnxious) => this.setState({ negativeAnxious })}
             value={this.state.negativeAnxious}
           />
         </div>

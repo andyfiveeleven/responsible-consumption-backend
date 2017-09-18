@@ -1,3 +1,5 @@
+import React from 'react';
+
 const RatingItem  = ({ checked, colored, onChange, value }) => (
   <label className={`rating__item ${colored ? 'rating__item--selected' : ''}`}>
     <input
@@ -10,4 +12,4 @@ const RatingItem  = ({ checked, colored, onChange, value }) => (
   </label>
 )
 
-export default RatingItem;
+export default RatingItem
