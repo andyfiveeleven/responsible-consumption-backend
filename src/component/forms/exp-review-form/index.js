@@ -1,13 +1,13 @@
 import React from 'react'
 import * as util from '../../lib/util.js'
-import RatingRadio from '../../rating-radio'
+import Rating from '../../rating'
 
 class expReviewForm extends React.Component {
   constructor(props){
     super(props)
 
     this.state = props.expReview
-      ? props.photo
+      ? props.expReview
       : {edibleName: '', lastMeal: 1, dayDescription: '', reaction: 3, edibleThc: 3}
 
     this.handleChange = this.handleChange.bind(this);
@@ -65,8 +65,10 @@ class expReviewForm extends React.Component {
 
         <div className='exp-review-rating-radio'>
           <h2>How much food have you eaten in the past 3 hours?</h2>
-          <RatingRadio
+          <Rating
             name='lastMeal'
+            min={1}
+            max={5}
             low='no food'
             high='large meal'
             onChange={this.handleChange}
@@ -85,8 +87,12 @@ class expReviewForm extends React.Component {
 
         <div className='exp-review-rating-radio'>
           <h2>How would you rate your experience?</h2>
-          <RatingRadio
+          <Rating
             name='reaction'
+            low='poor'
+            high='excellent'
+            min={1}
+            max={5}
             onChange={this.handleChange}
             value={this.state.reaction}
           />
@@ -94,10 +100,15 @@ class expReviewForm extends React.Component {
 
         <div className='exp-review-rating-radio'>
           <h2>How much thc does your edible contain?</h2>
-          <RatingRadio
-            low='under 2.5'
-            high='above 10'
+          <Rating
             name='edibleThc'
+            min={1}
+            max={5}
+            label1='2.5mg'
+            label2='5mg'
+            label3='7.5mg'
+            label4='10mg'
+            label5='more than 10mg'
             onChange={this.handleChange}
             value={this.state.reaction}
           />
