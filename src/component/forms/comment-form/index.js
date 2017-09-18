@@ -5,7 +5,7 @@ import debounce from 'lodash/fp/debounce'
 import Tooltip from '../tooltip'
 import * as util from '../../lib/util.js'
 
-class CommentRoute extends React.Component{
+class CommentForm extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -218,7 +218,7 @@ class CommentRoute extends React.Component{
         </textarea>
 
         <div className='exp-review-rating-radio'>
-          <h2>How relaxed did you feel when using edible?</h2>
+          <h2>How relaxed did you feel when using this edible?</h2>
           <Rating
             name='effectRelaxed'
             low='not relaxed'
@@ -231,7 +231,7 @@ class CommentRoute extends React.Component{
         </div>
 
         <div className='exp-review-rating-radio'>
-          <h2>How happy did you feel when using edible?</h2>
+          <h2>How happy did you feel when using this edible?</h2>
           <Rating
             name='effectHappy'
             low='not happy'
@@ -244,7 +244,7 @@ class CommentRoute extends React.Component{
         </div>
 
         <div className='exp-review-rating-radio'>
-          <h2>How euphoric did you feel when using edible?</h2>
+          <h2>How euphoric did you feel when using this edible?</h2>
           <Rating
             name='effectEuphoric'
             low='not euphoric'
@@ -257,7 +257,7 @@ class CommentRoute extends React.Component{
         </div>
 
         <div className='exp-review-rating-radio'>
-          <h2>How uplifted did you feel when using edible?</h2>
+          <h2>How uplifted did you feel when using this edible?</h2>
           <Rating
             name='effectUplifted'
             low='not uplifted'
@@ -270,7 +270,7 @@ class CommentRoute extends React.Component{
         </div>
 
         <div className='exp-review-rating-radio'>
-          <h2>How creative did you feel when using edible?</h2>
+          <h2>How creative did you feel when using this edible?</h2>
           <Rating
             name='effectCreative'
             low='not creative'
@@ -282,9 +282,130 @@ class CommentRoute extends React.Component{
           />
         </div>
 
+        <div className='exp-review-rating-radio'>
+          <h2>Did you have stress relief when using this edible?</h2>
+          <Rating
+            name='medicalStress'
+            low='very stressed'
+            high='not stressed'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.medicalStress}
+          />
+        </div>
 
+        <div className='exp-review-rating-radio'>
+          <h2>Did you have pain relief when using this edible?</h2>
+          <Rating
+            name='medicalPain'
+            low='had pain'
+            high='no pain'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.medicalPain}
+          />
+        </div>
+
+        <div className='exp-review-rating-radio'>
+          <h2>Did you have headache relief when using this edible?</h2>
+          <Rating
+            name='medicalHeadaches'
+            low='had headache'
+            high='no headache'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.medicalHeadaches}
+          />
+        </div>
+
+        <div className='exp-review-rating-radio'>
+          <h2>Did you have insomnia relief when using this edible?</h2>
+          <Rating
+            name='medicalInsomnia'
+            low='had insomnia'
+            high='no insomnia'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.medicalInsomnia}
+          />
+        </div>
+
+        <div className='exp-review-rating-radio'>
+          <h2>Did you have a dry mouth when using this edible?</h2>
+          <Rating
+            name='negativeDryMouth'
+            low='no dry mouth'
+            high='had dry mouth'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.negativeDryMouth}
+          />
+        </div>
+
+        <div className='exp-review-rating-radio'>
+          <h2>Did you have dry eyes when using this edible?</h2>
+          <Rating
+            name='negativeDryEyes'
+            low='no dry eyes'
+            high='had dry eyes'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.negativeDryEyes}
+          />
+        </div>
+
+        <div className='exp-review-rating-radio'>
+          <h2>Did you have paranoia when using this edible?</h2>
+          <Rating
+            name='negativeParanoid'
+            low='no paranoia'
+            high='had paranoia'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.negativeParanoid}
+          />
+        </div>
+
+        <div className='exp-review-rating-radio'>
+          <h2>Did you have dizzyness when using this edible?</h2>
+          <Rating
+            name='negativeDizzy'
+            low='no dizzyness'
+            high='had dizzyness'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.negativeDizzy}
+          />
+        </div>
+
+        <div className='exp-review-rating-radio'>
+          <h2>Did you have anxiousness when using this edible?</h2>
+          <Rating
+            name='negativeAnxious'
+            low='no anxiousness'
+            high='had anxiousness'
+            min={1}
+            max={5}
+            onChange={this.handleChange}
+            value={this.state.negativeAnxious}
+          />
+        </div>
+
+        <button type='submit'>
+          {this.props.buttonName}
+        </button>
 
       </form>
     )
   }
 }
+
+export default CommentForm;
