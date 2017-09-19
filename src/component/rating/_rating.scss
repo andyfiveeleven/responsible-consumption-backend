@@ -1,0 +1,36 @@
+@import "vars";
+//gonna want to put some vars in for the color and spacing probably
+
+.rating {
+  line-height: 1;
+  display: inline-block;
+
+  &__item {
+    display: inline;
+    font-size: 0;
+
+    &::before {
+      font-size: 18px;
+      letter-spacing: 5px;
+      content: "★";
+      color: lightgray;
+    }
+  }
+
+  &__input {
+    position: absolute;
+    visibility: hidden;
+  }
+}
+
+.rating:hover .rating__item::before {
+  color: hotpink;
+}
+
+.rating__item:hover ~ .rating__item::before {
+  color: lightgray;
+}
+
+.rating__item--selected::before {
+  color: hotpink;
+}
