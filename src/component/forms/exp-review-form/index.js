@@ -1,14 +1,14 @@
 import React from 'react'
-import * as util from '../../lib/util.js'
+import * as util from '../../../lib/util.js'
 import Rating from '../../rating'
 
-class expReviewForm extends React.Component {
+class ExpReviewForm extends React.Component {
   constructor(props){
     super(props)
 
     this.state = props.expReview
       ? props.expReview
-      : {edibleName: '', lastMeal: 1, dayDescription: '', reaction: 3, edibleThc: 3}
+      : {edibleName: '', lastMeal: 0, dayDescription: '', reaction: 0, edibleThc: 0}
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,9 +42,7 @@ class expReviewForm extends React.Component {
     e.preventDefault()
     return this.props.onComplete(this.state)
     .then(() => {
-      if(!this.props.expReview){
-        this.setState({edibleName: '', lastMeal: 1, dayDescription: '', reaction: 3, edibleThc: 3})
-      }
+      this.setState({edibleName: '', lastMeal: 1, dayDescription: '', reaction: 3, edibleThc: 3})
     })
   }
 
@@ -71,7 +69,7 @@ class expReviewForm extends React.Component {
             max={5}
             low='no food'
             high='large meal'
-            onChange={this.handleChange}
+            onChange={(lastMeal) => this.setState({lastMeal})}
             value={this.state.lastMeal}
           />
         </div>
@@ -93,7 +91,7 @@ class expReviewForm extends React.Component {
             high='excellent'
             min={1}
             max={5}
-            onChange={this.handleChange}
+            onChange={(reaction) => this.setState({reaction})}
             value={this.state.reaction}
           />
         </div>
@@ -109,8 +107,8 @@ class expReviewForm extends React.Component {
             label3='7.5mg'
             label4='10mg'
             label5='more than 10mg'
-            onChange={this.handleChange}
-            value={this.state.reaction}
+            onChange={(edibleThc) => this.setState({edibleThc})}
+            value={this.state.edibleThc}
           />
         </div>
 
@@ -119,4 +117,5 @@ class expReviewForm extends React.Component {
     )
   }
 }
-export default expReviewForm
+
+export default ExpReviewForm

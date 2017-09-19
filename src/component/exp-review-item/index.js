@@ -48,9 +48,9 @@ export class ExpReviewItem extends React.Component {
 
         {util.renderIf(this.state.editing,
           <div>
-            <PhotoForm
-              photo={this.props.photo}
-              buttonText='update photo'
+            <ExpReviewForm
+              expReview={this.props.expReview}
+              buttonText='update experience'
               onComplete={this.handleUpdate}
               />
           </div>
