@@ -3,6 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
+import OAuth from '../OAuth/index.js'
 
 import * as util from '../../lib/util.js'
 import LoginContainer from '../login-container';
@@ -16,6 +17,7 @@ class App extends React.Component {
             <Route path='/' component={LoginContainer} />
           </div>
         </BrowserRouter>
+        <OAuth />
       </div>
     )
   };
