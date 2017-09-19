@@ -1,3 +1,4 @@
+
 'use strict';
 
 import * as util from './util.js';
@@ -14,3 +15,4 @@ export default store => (next) => (action) => {
     return err;
   }
 };
+
