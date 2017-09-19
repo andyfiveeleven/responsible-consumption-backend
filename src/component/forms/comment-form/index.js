@@ -38,7 +38,6 @@ class CommentForm extends React.Component {
       submitted: false,
 
       edibleExists: true,
-
       focused: null,
     }
     this.validateInput = this.validateInput.bind(this)
@@ -112,26 +111,31 @@ class CommentForm extends React.Component {
 
     if(name === 'edibleName'){
       console.log('ED',value);
-      this.edibleDoesExist(value)
+      this.setState({
+        edibleList: this.edibleDoesExist(value)
+      })
     }
 
-    if(name === 'effectRelaxed'){
-      this.setState({ effectRelaxed })
-    }
     this.setState({
       [name]: value,
     })
   }
 
+
   edibleDoesExist(edibleName){
     return superagent.get(`${__API_URL__}/api/edible/search/${edibleName}`)
     .end((err, res) => {
-      console.log(res);
-    })
-      // this.setState({edibleExists: true, edibleName: edible})
+      this.setState({edibleExists: true})
+        let edibleList = res.body.map((edible) => {
+          return(
+            <option value={edible.name}>{edible.name}</option>
+          )
+        })
+        console.log(edibleList);
+        return edibleList;
+      })
+    }
 
-
-  }
 
   handleSubmit(e){
     e.preventDefault()
@@ -188,6 +192,7 @@ class CommentForm extends React.Component {
       edibleNameError,
       edibleExists
     } = this.state
+
     return(
       <form onSubmit={this.handleSubmit} id='commentForm'>
         <Tooltip message={edibleNameError} show={focused === 'edibleName' || submitted} />
@@ -202,7 +207,11 @@ class CommentForm extends React.Component {
           onBlur={this.handleBlur}
           />
 
-        <select name="edibleList" form="commentForm"></select>
+        {util.renderIf(this.state.edibleList,
+            <select name="edibleList" form="commentForm" onChange={this.handleChange}>
+              {this.state.edibleList}
+            </select>)}
+
 
         <Tooltip message={titleError} show={focused === 'title' || submitted} />
         <input
