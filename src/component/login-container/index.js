@@ -18,7 +18,7 @@ class LoginContainer extends React.Component{
     // this.handleLogin = this.handleLogin.bind(this);
   };
 
-  componentWillMount(){
+  // componentWillMount(){
     // if(document.cookie){
     //   console.log('yes');
     //   superagent.get(`https://responsible-consumption-stagin.herokuapp.com/api/profile`)
@@ -33,12 +33,6 @@ class LoginContainer extends React.Component{
     // }else{
     //   this.setState({isLoggedIn: false});
     // }
-
-  handleLogin(){
-    document.cookie = JSON.stringify({passHash: 'b8e7531f6fed41d87a822bff5ceb4a92580faabe9c0879edadd68b1bb937bfec', userID: '59c00d2066b9c5c04d57060f'});
-    let cookie = JSON.parse(document.cookie)
-
-  };
 
   render(){
     return(
