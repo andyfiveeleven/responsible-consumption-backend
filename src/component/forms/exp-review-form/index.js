@@ -42,7 +42,7 @@ class expReviewForm extends React.Component {
     e.preventDefault()
     return this.props.onComplete(this.state)
     .then(() => {
-      if(!thisprops.expReview){
+      if(!this.props.expReview){
         this.setState({edibleName: '', lastMeal: 1, dayDescription: '', reaction: 3, edibleThc: 3})
       }
     })

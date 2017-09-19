@@ -6,18 +6,18 @@ class Rating extends React.Component{
   constructor(props){
     super(props)
 
-    this.name=name;
-    this.low = low;
-    this.high = high;
-    this.label1= label1;
-    this.label2=label2;
-    this.label3=label3;
-    this.label4=label4;
-    this.label5=label5;
-    this.min = min;
-    this.max = max;
-    this.onChange = onChange;
-    this.value=value;
+    this.name = this.props.name;
+    this.low = this.props.low;
+    this.high = this.propshigh;
+    this.label1= this.props.label1;
+    this.label2= this.props.label2;
+    this.label3= this.props.label3;
+    this.label4= this.props.label4;
+    this.label5= this.props.label5;
+    this.min = this.props.min;
+    this.max = this.props.max;
+    this.onChange = this.props.onChange;
+    this.value= this.props.value;
   }
 
   render(){

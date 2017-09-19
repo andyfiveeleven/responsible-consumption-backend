@@ -5,11 +5,11 @@ class RatingItem extends React.Component {
   constructor(props){
     super(props);
 
-    this.checked = checked;
-    this.className = className;
-    this.onChange =onChange;
-    this.value=value
-    this.name=name
+    this.checked = this.props.checked;
+    this.className = this.props.className;
+    this.onChange = this.props.onChange;
+    this.value= this.props.value
+    this.name= this.props.name
   }
 
   render(){
