@@ -45,6 +45,7 @@ class CommentForm extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleFocus = this.handleFocus.bind(this)
+    this.handleBlurOptions = this.handleBlurOptions.bind(this)
     this.edibleDoesExist = debounce(50)(this.edibleDoesExist.bind(this))
   }
 
@@ -70,20 +71,20 @@ class CommentForm extends React.Component {
     }
 
     if(name === 'edibleName')
-      if(!value)
-        setError(name, `${placeholder} can not be empty`)
-      else
-        deleteError(name)
+    if(!value)
+    setError(name, `${placeholder} can not be empty`)
+    else
+    deleteError(name)
 
     if(name === 'title'){
       if(!value)
-        setError(name, `${placeholder} can not be empty`)
+      setError(name, `${placeholder} can not be empty`)
       else deleteError(name)
     }
 
     if(name === 'commentBody'){
       if(!value)
-        setError(name, `${placeholder} can not be empty`)
+      setError(name, `${placeholder} can not be empty`)
       else deleteError(name)
     }
 
@@ -126,15 +127,24 @@ class CommentForm extends React.Component {
     return superagent.get(`${__API_URL__}/api/edible/search/${edibleName}`)
     .end((err, res) => {
       this.setState({edibleExists: true})
-        let edibleList = res.body.map((edible) => {
-          return(
-            <option value={edible.name}>{edible.name}</option>
-          )
-        })
-        console.log(edibleList);
-        return edibleList;
-      })
-    }
+      let edibleList = res.body;
+
+      console.log(edibleList);
+      return edibleList;
+    })
+  }
+
+
+  handleBlurOptions(e) {
+    let options = []
+    JSON.parse(this.state.edibleList.xhr.response).map(item => {
+      let option = <option key={item._id} value={item.name}>{item.name}</option>
+      options.push(option);
+    })
+    this.setState({ options })
+    console.log('DDDDDDDDDDDDDD',this.state.options);
+  }
+
 
 
   handleSubmit(e){
@@ -182,6 +192,7 @@ class CommentForm extends React.Component {
     }))
   }
 
+
   render(){
     let {
       focused,
@@ -194,308 +205,316 @@ class CommentForm extends React.Component {
     } = this.state
 
     return(
-      <form onSubmit={this.handleSubmit} id='commentForm'>
-        <Tooltip message={edibleNameError} show={focused === 'edibleName' || submitted} />
-        <input
-          className={util.classToggler({error: edibleNameError})}
-          type='text'
-          name='edibleName'
-          placeholder='edible name'
-          value={this.state.edibleName}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          />
+      <div>
+        <form onSubmit={this.handleSubmit} id='commentForm'>
+          <Tooltip message={edibleNameError} show={focused === 'edibleName' || submitted} />
+          <input
+            className={util.classToggler({error: edibleNameError})}
+            type='text'
+            name='edibleName'
+            placeholder='edible name'
+            value={this.state.edibleName}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            />
 
-        {util.renderIf(this.state.edibleList,
-            <select name="edibleList" form="commentForm" onChange={this.handleChange}>
-              {this.state.edibleList}
+          {util.renderIf(this.state.edibleList,
+            <select name="edibleSelect" form="commentForm" onChange={this.handleChange} onClick={this.handleBlurOptions}>
+              <option>-Please select an edible-</option>
+              {console.log(this.state.options)}
+              {this.state.options}
             </select>)}
+          </form>
+          <form onSubmit={this.handleSubmit}>
 
 
-        <Tooltip message={titleError} show={focused === 'title' || submitted} />
-        <input
-          className={util.classToggler({error: titleError})}
-          type='text'
-          name='title'
-          placeholder='title'
-          value={this.state.title}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          />
 
-        <Tooltip message={commentBodyError} show={focused === 'commentBody' || submitted} />
-        <textarea
-          className={util.classToggler({error: commentBodyError})}
-          type='text'
-          name='commentBody'
-          placeholder='comment body'
-          value={this.state.commentBody}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}>
-        </textarea>
 
-        <div className='exp-review-rating-radio'>
-          <h2>How relaxed did you feel when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='effectRelaxed'
-            low='not relaxed'
-            high='very relaxed'
-            min={1}
-            max={5}
-            onChange={(effectRelaxed) => this.setState({ effectRelaxed })}
-            value={this.state.effectRelaxed}
-          />
-        </div>
+          <Tooltip message={titleError} show={focused === 'title' || submitted} />
+          <input
+            className={util.classToggler({error: titleError})}
+            type='text'
+            name='title'
+            placeholder='title'
+            value={this.state.title}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            />
 
-        <div className='exp-review-rating-radio'>
-          <h2>How happy did you feel when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='effectHappy'
-            low='not happy'
-            high='very happy'
-            min={1}
-            max={5}
-            onChange={(effectHappy) => this.setState({ effectHappy })}
-            value={this.state.effectHappy}
-          />
-        </div>
+          <Tooltip message={commentBodyError} show={focused === 'commentBody' || submitted} />
+          <textarea
+            className={util.classToggler({error: commentBodyError})}
+            type='text'
+            name='commentBody'
+            placeholder='comment body'
+            value={this.state.commentBody}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}>
+          </textarea>
 
-        <div className='exp-review-rating-radio'>
-          <h2>How euphoric did you feel when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='effectEuphoric'
-            low='not euphoric'
-            high='very euphoric'
-            min={1}
-            max={5}
-            onChange={(effectEuphoric) => this.setState({ effectEuphoric })}
-            value={this.state.effectEuphoric}
-          />
-        </div>
+          <div className='exp-review-rating-radio'>
+            <h2>How relaxed did you feel when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='effectRelaxed'
+              low='not relaxed'
+              high='very relaxed'
+              min={1}
+              max={5}
+              onChange={(effectRelaxed) => this.setState({ effectRelaxed })}
+              value={this.state.effectRelaxed}
+              />
+          </div>
 
-        <div className='exp-review-rating-radio'>
-          <h2>How uplifted did you feel when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='effectUplifted'
-            low='not uplifted'
-            high='very uplifted'
-            min={1}
-            max={5}
-            onChange={(effectUplifted) => this.setState({ effectUplifted })}
-            value={this.state.effectUplifted}
-          />
-        </div>
+          <div className='exp-review-rating-radio'>
+            <h2>How happy did you feel when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='effectHappy'
+              low='not happy'
+              high='very happy'
+              min={1}
+              max={5}
+              onChange={(effectHappy) => this.setState({ effectHappy })}
+              value={this.state.effectHappy}
+              />
+          </div>
 
-        <div className='exp-review-rating-radio'>
-          <h2>How creative did you feel when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='effectCreative'
-            low='not creative'
-            high='very creative'
-            min={1}
-            max={5}
-            onChange={(effectCreative) => this.setState({ effectCreative })}
-            value={this.state.effectCreative}
-          />
-        </div>
+          <div className='exp-review-rating-radio'>
+            <h2>How euphoric did you feel when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='effectEuphoric'
+              low='not euphoric'
+              high='very euphoric'
+              min={1}
+              max={5}
+              onChange={(effectEuphoric) => this.setState({ effectEuphoric })}
+              value={this.state.effectEuphoric}
+              />
+          </div>
 
-        <div className='exp-review-rating-radio'>
-          <h2>Did you have stress relief when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='medicalStress'
-            low='very stressed'
-            high='not stressed'
-            min={1}
-            max={5}
-            onChange={(medicalStress) => this.setState({ medicalStress })}
-            value={this.state.medicalStress}
-          />
-        </div>
+          <div className='exp-review-rating-radio'>
+            <h2>How uplifted did you feel when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='effectUplifted'
+              low='not uplifted'
+              high='very uplifted'
+              min={1}
+              max={5}
+              onChange={(effectUplifted) => this.setState({ effectUplifted })}
+              value={this.state.effectUplifted}
+              />
+          </div>
 
-        <div className='exp-review-rating-radio'>
-          <h2>Did you have pain relief when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='medicalPain'
-            low='had pain'
-            high='no pain'
-            min={1}
-            max={5}
-            onChange={(medicalPain) => this.setState({ medicalPain })}
-            value={this.state.medicalPain}
-          />
-        </div>
+          <div className='exp-review-rating-radio'>
+            <h2>How creative did you feel when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='effectCreative'
+              low='not creative'
+              high='very creative'
+              min={1}
+              max={5}
+              onChange={(effectCreative) => this.setState({ effectCreative })}
+              value={this.state.effectCreative}
+              />
+          </div>
 
-        <div className='exp-review-rating-radio'>
-          <h2>Did you have headache relief when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='medicalHeadaches'
-            low='had headache'
-            high='no headache'
-            min={1}
-            max={5}
-            onChange={(medicalHeadaches) => this.setState({ medicalHeadaches })}
-            value={this.state.medicalHeadaches}
-          />
-        </div>
+          <div className='exp-review-rating-radio'>
+            <h2>Did you have stress relief when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='medicalStress'
+              low='very stressed'
+              high='not stressed'
+              min={1}
+              max={5}
+              onChange={(medicalStress) => this.setState({ medicalStress })}
+              value={this.state.medicalStress}
+              />
+          </div>
 
-        <div className='exp-review-rating-radio'>
-          <h2>Did you have insomnia relief when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='medicalInsomnia'
-            low='had insomnia'
-            high='no insomnia'
-            min={1}
-            max={5}
-            onChange={(medicalInsomnia) => this.setState({ medicalInsomnia })}
-            value={this.state.medicalInsomnia}
-          />
-        </div>
+          <div className='exp-review-rating-radio'>
+            <h2>Did you have pain relief when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='medicalPain'
+              low='had pain'
+              high='no pain'
+              min={1}
+              max={5}
+              onChange={(medicalPain) => this.setState({ medicalPain })}
+              value={this.state.medicalPain}
+              />
+          </div>
 
-        <div className='exp-review-rating-radio'>
-          <h2>Did you have a dry mouth when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='negativeDryMouth'
-            low='no dry mouth'
-            high='had dry mouth'
-            min={1}
-            max={5}
-            onChange={(negativeDryMouth) => this.setState({ negativeDryMouth })}
-            value={this.state.negativeDryMouth}
-          />
-        </div>
+          <div className='exp-review-rating-radio'>
+            <h2>Did you have headache relief when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='medicalHeadaches'
+              low='had headache'
+              high='no headache'
+              min={1}
+              max={5}
+              onChange={(medicalHeadaches) => this.setState({ medicalHeadaches })}
+              value={this.state.medicalHeadaches}
+              />
+          </div>
 
-        <div className='exp-review-rating-radio'>
-          <h2>Did you have dry eyes when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='negativeDryEyes'
-            low='no dry eyes'
-            high='had dry eyes'
-            min={1}
-            max={5}
-            onChange={(negativeDryEyes) => this.setState({ negativeDryEyes })}
-            value={this.state.negativeDryEyes}
-          />
-        </div>
+          <div className='exp-review-rating-radio'>
+            <h2>Did you have insomnia relief when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='medicalInsomnia'
+              low='had insomnia'
+              high='no insomnia'
+              min={1}
+              max={5}
+              onChange={(medicalInsomnia) => this.setState({ medicalInsomnia })}
+              value={this.state.medicalInsomnia}
+              />
+          </div>
 
-        <div className='exp-review-rating-radio'>
-          <h2>Did you have paranoia when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='negativeParanoid'
-            low='no paranoia'
-            high='had paranoia'
-            min={1}
-            max={5}
-            onChange={(negativeParanoid) => this.setState({ negativeParanoid })}
-            value={this.state.negativeParanoid}
-          />
-        </div>
+          <div className='exp-review-rating-radio'>
+            <h2>Did you have a dry mouth when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='negativeDryMouth'
+              low='no dry mouth'
+              high='had dry mouth'
+              min={1}
+              max={5}
+              onChange={(negativeDryMouth) => this.setState({ negativeDryMouth })}
+              value={this.state.negativeDryMouth}
+              />
+          </div>
 
-        <div className='exp-review-rating-radio'>
-          <h2>Did you have dizzyness when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='negativeDizzy'
-            low='no dizzyness'
-            high='had dizzyness'
-            min={1}
-            max={5}
-            onChange={(negativeDizzy) => this.setState({ negativeDizzy })}
-            value={this.state.negativeDizzy}
-          />
-        </div>
+          <div className='exp-review-rating-radio'>
+            <h2>Did you have dry eyes when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='negativeDryEyes'
+              low='no dry eyes'
+              high='had dry eyes'
+              min={1}
+              max={5}
+              onChange={(negativeDryEyes) => this.setState({ negativeDryEyes })}
+              value={this.state.negativeDryEyes}
+              />
+          </div>
 
-        <div className='exp-review-rating-radio'>
-          <h2>Did you have anxiousness when using this edible?</h2>
-          <Rating
-            label1 = '1'
-            label2 = '2'
-            label3 = '3'
-            label4 = '4'
-            label5 = '5'
-            name='negativeAnxious'
-            low='no anxiousness'
-            high='had anxiousness'
-            min={1}
-            max={5}
-            onChange={(negativeAnxious) => this.setState({ negativeAnxious })}
-            value={this.state.negativeAnxious}
-          />
-        </div>
+          <div className='exp-review-rating-radio'>
+            <h2>Did you have paranoia when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='negativeParanoid'
+              low='no paranoia'
+              high='had paranoia'
+              min={1}
+              max={5}
+              onChange={(negativeParanoid) => this.setState({ negativeParanoid })}
+              value={this.state.negativeParanoid}
+              />
+          </div>
 
-        <button type='submit'>
-          {this.props.buttonName}
-        </button>
+          <div className='exp-review-rating-radio'>
+            <h2>Did you have dizzyness when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='negativeDizzy'
+              low='no dizzyness'
+              high='had dizzyness'
+              min={1}
+              max={5}
+              onChange={(negativeDizzy) => this.setState({ negativeDizzy })}
+              value={this.state.negativeDizzy}
+              />
+          </div>
 
-      </form>
+          <div className='exp-review-rating-radio'>
+            <h2>Did you have anxiousness when using this edible?</h2>
+            <Rating
+              label1 = '1'
+              label2 = '2'
+              label3 = '3'
+              label4 = '4'
+              label5 = '5'
+              name='negativeAnxious'
+              low='no anxiousness'
+              high='had anxiousness'
+              min={1}
+              max={5}
+              onChange={(negativeAnxious) => this.setState({ negativeAnxious })}
+              value={this.state.negativeAnxious}
+              />
+          </div>
+
+          <button type='submit'>
+            {this.props.buttonName}
+          </button>
+
+        </form>
+      </div>
     )
   }
 }
 
-export default CommentForm;
+  export default CommentForm;
