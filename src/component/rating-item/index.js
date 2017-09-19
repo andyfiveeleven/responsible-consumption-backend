@@ -11,3 +11,5 @@ const RatingItem  = ({ checked, colored, onChange, value }) => (
     />
   </label>
 )
+
+export default RatingItem

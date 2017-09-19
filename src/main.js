@@ -6,7 +6,7 @@ import {Provider} from 'react-redux';
 
 
 import App from './component/app';
-import CommentForm from '/Users/jamesrbillard/programs/code_fellows/code_401/final/responsible-consumption-frontend/src/component/forms/comment-form/index.js'
+import ExpReviewForm from './component/forms/exp-review-form';
 import appStoreCreate from './lib/store-create.js';
 import './style/main.scss';
 
@@ -20,4 +20,4 @@ const AppContainer = () => {
   )
 };
 
-ReactDom.render(<CommentForm />, document.getElementById('root'));
+ReactDom.render(<ExpReviewForm />,  document.getElementById('root'));
