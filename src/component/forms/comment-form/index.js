@@ -37,7 +37,7 @@ class CommentForm extends React.Component {
       error: false,
       submitted: false,
 
-      edibleExists: true,
+      edibleExists: null,
       focused: null,
     }
     this.validateInput = this.validateInput.bind(this)
@@ -45,7 +45,7 @@ class CommentForm extends React.Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleFocus = this.handleFocus.bind(this)
-    this.handleBlurOptions = this.handleBlurOptions.bind(this)
+    this.handleClickOptions = this.handleClickOptions.bind(this)
     this.edibleDoesExist = debounce(50)(this.edibleDoesExist.bind(this))
   }
 
@@ -106,15 +106,23 @@ class CommentForm extends React.Component {
   }
 
   handleChange(e){
-    console.log('EVENT',e.target);
+    console.log('EVENT',e.target.name, e.target.value);
     let {name, value} = e.target
     this.validateInput({...e})
 
     if(name === 'edibleName'){
       console.log('ED',value);
-      this.setState({
-        edibleList: this.edibleDoesExist(value)
+        this.edibleDoesExist(value)
+    }
+
+    if(name === 'edibleSelect'){
+      let selected = this.state.edibleList.filter(edible => {
+        return edible.name === value;
       })
+      this.setState({
+        selected
+      })
+      console.log('FUCKMESHITBALLS',this.state.selected);
     }
 
     this.setState({
@@ -126,23 +134,23 @@ class CommentForm extends React.Component {
   edibleDoesExist(edibleName){
     return superagent.get(`${__API_URL__}/api/edible/search/${edibleName}`)
     .end((err, res) => {
-      this.setState({edibleExists: true})
+      if(err) console.error(err);
       let edibleList = res.body;
+      this.setState({edibleExists: true, edibleList})
 
-      console.log(edibleList);
+      console.log('edibleList',edibleList);
       return edibleList;
     })
   }
 
 
-  handleBlurOptions(e) {
+  handleClickOptions(e) {
     let options = []
-    JSON.parse(this.state.edibleList.xhr.response).map(item => {
+    this.state.edibleList.map(item => {
       let option = <option key={item._id} value={item.name}>{item.name}</option>
       options.push(option);
     })
     this.setState({ options })
-    console.log('DDDDDDDDDDDDDD',this.state.options);
   }
 
 
@@ -174,6 +182,15 @@ class CommentForm extends React.Component {
           negativeParanoid: 0,
           negativeDizzy: 0,
           negativeAnxious: 0,
+
+          edibleNameError: null,
+          titleError: null,
+          commentBodyError: null,
+          error: false,
+          submitted: false,
+
+          edibleExists: null,
+          focused: null,
         })
       })
       .catch(error => {
@@ -219,10 +236,9 @@ class CommentForm extends React.Component {
             onBlur={this.handleBlur}
             />
 
-          {util.renderIf(this.state.edibleList,
-            <select name="edibleSelect" form="commentForm" onChange={this.handleChange} onClick={this.handleBlurOptions}>
+          {util.renderIf(this.state.edibleExists,
+            <select name="edibleSelect" form="commentForm" onChange={this.handleChange} onClick={this.handleClickOptions}>
               <option>-Please select an edible-</option>
-              {console.log(this.state.options)}
               {this.state.options}
             </select>)}
           </form>
