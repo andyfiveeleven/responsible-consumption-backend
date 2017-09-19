@@ -43,6 +43,7 @@ class CommentForm extends React.Component {
     }
     this.validateInput = this.validateInput.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleFocus = this.handleFocus.bind(this)
     this.edibleDoesExist = debounce(50)(this.edibleDoesExist.bind(this))
@@ -50,7 +51,9 @@ class CommentForm extends React.Component {
 
 
   validateInput(e){
-    let {name, value} = e.target
+    console.log(e);
+    let {name, placeholder, value} = e.target
+
 
     let errors = {
       edibleNameError: this.state.titleError,
@@ -69,19 +72,19 @@ class CommentForm extends React.Component {
 
     if(name === 'edibleName')
       if(!value)
-        setError(name, `${name} can not be empty`)
+        setError(name, `${placeholder} can not be empty`)
       else
         deleteError(name)
 
     if(name === 'title'){
       if(!value)
-        setError(name, `${name} can not be empty`)
+        setError(name, `${placeholder} can not be empty`)
       else deleteError(name)
     }
 
     if(name === 'commentBody'){
       if(!value)
-        setError(name, `${name} can not be empty`)
+        setError(name, `${placeholder} can not be empty`)
       else deleteError(name)
     }
 
@@ -125,8 +128,8 @@ class CommentForm extends React.Component {
   edibleDoesExist(edibleName){
     return superagent.get(`${__API_URL__}/api/edible/search/${edibleName}`)
     .then((edible) => {
-      console.log(edible);
-      this.setState({edibleExists: true, edibleName: edible})
+      console.log(edible.body);
+      // this.setState({edibleExists: true, edibleName: edible})
 
     })
     .catch(() => this.setState({edibleExists: false}))
@@ -135,6 +138,7 @@ class CommentForm extends React.Component {
   handleSubmit(e){
     e.preventDefault()
     if(!this.state.error){
+      console.log(this.state);
       this.props.onComplete(this.state)
       .then(() => {
         this.setState({
@@ -193,7 +197,7 @@ class CommentForm extends React.Component {
           className={util.classToggler({error: edibleNameError})}
           type='text'
           name='edibleName'
-          placeholder='edibleName'
+          placeholder='edible name'
           value={this.state.edibleName}
           onChange={this.handleChange}
           onFocus={this.handleFocus}
@@ -217,7 +221,7 @@ class CommentForm extends React.Component {
           className={util.classToggler({error: commentBodyError})}
           type='text'
           name='commentBody'
-          placeholder='commentBody'
+          placeholder='comment body'
           value={this.state.commentBody}
           onChange={this.handleChange}
           onFocus={this.handleFocus}
