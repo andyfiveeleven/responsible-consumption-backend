@@ -37,6 +37,8 @@ class CommentForm extends React.Component {
       error: false,
       submitted: false,
 
+      selected: 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Cannabis_leaf.svg',
+
       edibleExists: null,
       focused: null,
     }
@@ -117,12 +119,14 @@ class CommentForm extends React.Component {
 
     if(name === 'edibleSelect'){
       let selected = this.state.edibleList.filter(edible => {
-        return edible.name === value;
+        console.log('EDNAME',edible.name);
+        console.log(value);
+        return edible.name == value;
       })
       this.setState({
-        selected
+        selected: selected
       })
-      console.log('FUCKMESHITBALLS',this.state.selected);
+      console.log('FUCKMESHITBALLS', selected);
     }
 
     this.setState({
@@ -241,8 +245,10 @@ class CommentForm extends React.Component {
               <option>-Please select an edible-</option>
               {this.state.options}
             </select>)}
+            <img src={this.state.selected[0].image}></img>
           </form>
           <form onSubmit={this.handleSubmit}>
+
 
 
 
