@@ -1,4 +1,3 @@
-
 'use strict'
 export default store => next => action =>
   typeof action === 'function'
