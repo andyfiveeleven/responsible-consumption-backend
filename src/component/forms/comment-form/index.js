@@ -106,14 +106,12 @@ class CommentForm extends React.Component {
   }
 
   handleChange(e){
-    console.log('EVENT',e);
+    console.log('EVENT',e.target);
     let {name, value} = e.target
     this.validateInput({...e})
 
-    console.log(name);
-
-
     if(name === 'edibleName'){
+      console.log('ED',value);
       this.edibleDoesExist(value)
     }
 
@@ -127,12 +125,12 @@ class CommentForm extends React.Component {
 
   edibleDoesExist(edibleName){
     return superagent.get(`${__API_URL__}/api/edible/search/${edibleName}`)
-    .then((edible) => {
-      console.log(edible.body);
+    .end((err, res) => {
+      console.log(res);
+    })
       // this.setState({edibleExists: true, edibleName: edible})
 
-    })
-    .catch(() => this.setState({edibleExists: false}))
+
   }
 
   handleSubmit(e){
@@ -191,7 +189,7 @@ class CommentForm extends React.Component {
       edibleExists
     } = this.state
     return(
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} id='commentForm'>
         <Tooltip message={edibleNameError} show={focused === 'edibleName' || submitted} />
         <input
           className={util.classToggler({error: edibleNameError})}
@@ -203,6 +201,8 @@ class CommentForm extends React.Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           />
+
+        <select name="edibleList" form="commentForm"></select>
 
         <Tooltip message={titleError} show={focused === 'title' || submitted} />
         <input
