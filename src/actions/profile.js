@@ -2,12 +2,12 @@ import superagent from 'superagent';
 
 export const userProfileCreate = (profile) => ({
   type:'USER_PROFILE_CREATE',
-  payload: profile;
+  payload: profile
 })
 
 export const userProfileUpdate = (profile) => ({
   type: 'USER_PROFILE_UPDATE',
-  payload: profile,
+  payload: profile
 })
 
 export const userProfileCreateRequest = (profile) => (dispatch, getState) => {

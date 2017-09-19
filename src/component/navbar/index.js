@@ -1,13 +1,13 @@
-import './_navbar.scss'
+// import './_navbar.scss'
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-redux'
 
 import Avatar from '../avatar'
-import {tokenSet} from '../../action/auth.js'
+import {tokenSet} from '../../actions/login-actions.js'
 import * as util from '../../lib/util.js'
 import * as authActions from '../../actions/auth.js'
-import {userProfileFetchRequest} from '../../action/profile.js'
+import {userProfileFetchRequest} from '../../actions/profile.js'
 
 let NavLink = (props) => (
   <li className={util.classToggler({selected: props.url === `/${props.route}` })} >
@@ -20,27 +20,27 @@ let NavLink = (props) => (
 class Navbar extends React.Component {
   constructor(props){
     super(props)
-    this.validateRoute = this.validateRoute.bind(this)
+    // this.validateRoute = this.validateRoute.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
   }
 
-  componentDidMount(){
-    this.validate(this.props)
-  }
-
-  validateRoute(props){
-    let {match, history} = props
-    let token = util.readcookie(X-Token)
-    if(!token){
-      return history.replace('welcome/signup')
-    }
-
-    this.props.tokenSet(token)
-    this.props.userProfileFetch()
-    .catch(() => {
-      console.log(error)
-    })
-  }
+  // componentDidMount(){
+  //   this.validate(this.props)
+  // }
+  //
+  // validateRoute(props){
+  //   let {match, history} = props
+  //   let token = util.readcookie(X-Token)
+  //   if(!token){
+  //     return history.replace('welcome/signup')
+  //   }
+  //
+  //   this.props.tokenSet(token)
+  //   this.props.userProfileFetch()
+  //   .catch(() => {
+  //     console.log(error)
+  //   })
+  // }
 
   handleLogout(){
     tis.props.logout()
@@ -51,6 +51,9 @@ class Navbar extends React.Component {
     console.log('path', this.props.match)
 
     //<Icon className='logo name='' />   ++++ ADD to return with icon
+    // <NavLink route='settings' url={url} />
+    // <NavLink route='dashboard' url={url} />
+
 
     return(
       <header className='navbar'>
@@ -61,8 +64,6 @@ class Navbar extends React.Component {
           <div className='panel>'>
             <nav>
               <ul>
-                <NavLink route='settings' url={url} />
-                <NavLink route='dashboard' url={url} />
               </ul>
             </nav>
           </div>
@@ -81,7 +82,7 @@ class Navbar extends React.Component {
 }
 let mapStateToProps = (state) => ({
   loggedIn: !!state.auth,
-  userProfile.userProfile,
+  // userProfile: state.userProfile,
 })
 
 let mapDispatchToProps = (dispatch) => ({

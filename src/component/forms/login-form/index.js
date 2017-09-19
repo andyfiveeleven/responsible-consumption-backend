@@ -23,6 +23,7 @@ class LoginForm extends React.Component{
 
   handleSubmit(e){
     e.preventDefault();
+    
   };
 
   render(){
@@ -42,5 +43,12 @@ class LoginForm extends React.Component{
     )
   }
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signupRequest: (user) => dispatch(signupRequest(user)),
+    signinRequest: (user) => dispatch(signinRequest(user))
+  }
+}
 
 export default LoginForm;
