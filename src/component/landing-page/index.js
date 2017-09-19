@@ -18,8 +18,10 @@ class LandingPage extends React.Component{
   componentWillMount(){
     if(document.cookie){
       console.log('yes');
-      superagent.get(`https://responsible-consumption-stagin.herokuapp.com/api/profile`)
-      .set({Authorization: `Bearer ${document.cookie.findHash}`})
+      let cookie = JSON.parse(document.cookie)
+      console.log(cookie.findHash);
+      superagent.get(`https://responsible-consumption-stagin.herokuapp.com/api/profile/${cookie.userID}`)
+      .set({Authorization: `Bearer ${cookie.findHash}`})
       .end((err, res) => {
         if(err){
           this.setState({hasError: err.status});

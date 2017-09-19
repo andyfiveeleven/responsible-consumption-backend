@@ -12,12 +12,12 @@ export const cookieRemove = () => ({
 });
 
 export const signupRequest = (user) => (dispatch) => {
-  return superagent.post('https://responsible-consumption-stagin.herokuapp.com/signup')
-  .withCredentials()
+  return superagent.post('https://responsible-consumption-stagin.herokuapp.com/api/signup')
+  .send(user)
   .then((res) => {
-    dispatch(cookieCreate(res.body))
+    // dispatch(cookieCreate(res.body))
     try{
-      document.cookie = res.body.findHash
+      document.cookie = JSON.stringify(user);
     }catch(err){
       console.error(err);
     }
@@ -26,11 +26,12 @@ export const signupRequest = (user) => (dispatch) => {
 };
 
 export const signinRequest = (user) => (dispatch) => {
-  return superagent.get('https://responsible-consumption-stagin.herokuapp.com/signin')
-  .withCredentials()
+  return superagent.get('https://responsible-consumption-stagin.herokuapp.com/api/signin')
   .auth(user.username, user.password)
   .then((res) => {
-    dispatch(cookieCreate(res.body))
+    // dispatch(cookieCreate(res.body))
+    console.log(res);
+    document.cookie = JSON.stringify(res.body)
     return res;
   });
 };

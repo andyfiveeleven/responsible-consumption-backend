@@ -1,14 +1,20 @@
 'use strict';
 
 import React from 'react';
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router';
+
+import {signupRequest} from '../../../actions/login-actions.js';
 
 class LoginForm extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      username: '',
-      password: '',
-      email: ''
+      user: {
+        username: '',
+        password: '',
+        email: ''
+      }
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -16,14 +22,18 @@ class LoginForm extends React.Component{
 
   handleChange(e){
     let name = e.target.name;
-    if(name === 'username') this.setState({username: e.target.value});
-    if(name === 'password') this.setState({password: e.target.value});
-    if(name === 'email') this.setState({email: e.target.value});
+    if(name === 'username') this.setState({user: {username: e.target.value}});
+    if(name === 'password') this.setState({user: {password: e.target.value}});
+    if(name === 'email') this.setState({user: {email: e.target.value}});
   };
 
   handleSubmit(e){
     e.preventDefault();
-    
+    try{
+      this.props.signupRequest(this.state);
+    }catch(err){
+
+    }
   };
 
   render(){
@@ -33,6 +43,7 @@ class LoginForm extends React.Component{
           <input type='text' name='username' placeholder='username' onChange={this.handleChange} />
           <input type='text' name='password' placeholder='password' onChange={this.handleChange} />
           <input type='text' name='email' placeholder='email' onChange={this.handleChange} />
+          <button type='submit'>Push yo shit</button>
         </form>
         <p>or login with</p>
         <h1>Output</h1>
@@ -44,11 +55,8 @@ class LoginForm extends React.Component{
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signupRequest: (user) => dispatch(signupRequest(user)),
-    signinRequest: (user) => dispatch(signinRequest(user))
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  signupRequest: (user) => dispatch(signupRequest(user))
+})
 
-export default LoginForm;
+export default connect(undefined, mapDispatchToProps)(LoginForm);
