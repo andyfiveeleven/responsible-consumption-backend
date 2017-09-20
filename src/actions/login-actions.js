@@ -12,8 +12,8 @@ export const cookieRemove = () => ({
 });
 
 export const signupRequest = (user) => (dispatch) => {
-  return superagent.post('https://responsible-consumption-stagin.herokuapp.com/api/signup')
-  .send(user)
+  return superagent.post(`${__API_URL__}/api/signup`)
+  .withCredentials()
   .then((res) => {
     // dispatch(cookieCreate(res.body))
     try{
@@ -26,7 +26,8 @@ export const signupRequest = (user) => (dispatch) => {
 };
 
 export const signinRequest = (user) => (dispatch) => {
-  return superagent.get('https://responsible-consumption-stagin.herokuapp.com/api/signin')
+  return superagent.get(`${__API_URL__}/api/signin`)
+  .withCredentials()
   .auth(user.username, user.password)
   .then((res) => {
     // dispatch(cookieCreate(res.body))
