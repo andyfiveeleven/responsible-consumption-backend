@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link, Redirect} from 'react-router-dom'
 
 import SignupForm from '../forms/signup-form/index'
-import LoginForm from '../forms/LoginForm/index'
+import LoginForm from '../forms/login-form/index'
 import * as util from '../../lib/util.js'
 import {signupRequest, loginRequest} from '../../actions/auth-actions'
 import {profileFetchRequest} from '../../actions/profile-actions'

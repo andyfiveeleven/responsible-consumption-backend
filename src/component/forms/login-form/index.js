@@ -7,7 +7,6 @@ import debounce from 'lodash/fp/debounce'
 
 import Tooltip from '../../tooltip/index'
 import * as util from '../../../lib/util'
-import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 
@@ -205,4 +204,3 @@ class LoginForm extends React.Component {
 }
 
 export default LoginForm
-
