@@ -8,7 +8,7 @@ import OAuth from '../OAuth/index.js';
 
 import * as util from '../../lib/util.js'
 import LoginContainer from '../login-container';
-import Dashboard from '../dashboard';
+import Dashboard from '../dashboard-container';
 import LandingPage from '../landing-page';
 import Navbar from '../navbar';
 

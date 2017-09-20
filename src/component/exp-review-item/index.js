@@ -1,16 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import ExpReviewForm from '../../exp-review-form'
+import ExpReviewForm from '../forms/exp-review-form'
 import * as util from '../../lib/util.js'
-import * as expReviewActions from '../../action/exp-review-actions.js'
+import * as expReviewActions from '../../actions/exp-review-action.js'
 
 export class ExpReviewItem extends React.Component {
   constructor(props){
     super(props);
 
     this.state= {
-      editing: false;
+      editing: false
     }
 
     this.handleDelete = this.handleDelete.bind(this);
@@ -69,4 +69,4 @@ let mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ExpItem)
+)(ExpReviewItem)
