@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 
 
 import App from './component/app';
+import ExpReviewForm from './component/forms/exp-review-form';
 import appStoreCreate from './lib/store-create.js';
 import CommentForm from './component/forms/comment-form/index'
 import './style/main.scss';
@@ -20,4 +21,4 @@ const AppContainer = () => {
   )
 };
 
-ReactDom.render(<AppContainer />, document.getElementById('root'));
+ReactDom.render(<AppContainer/>,  document.getElementById('root'));
