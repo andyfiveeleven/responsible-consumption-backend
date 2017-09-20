@@ -2,22 +2,22 @@ import superagent from 'superagent'
 //TODO make this. make it good.
 
 export const expReviewsSet = (expReviews) => ({
-  type: 'EXP_REVIEWS_SET'
+  type: 'EXP_REVIEWS_SET',
   payload: expReviews,
 })
 
 export const expReviewCreate = (expReview) => ({
-  type: 'EXP_REVIEW_CREATE'
+  type: 'EXP_REVIEW_CREATE',
   payload: expReview,
 })
 
 export const expReviewUpdate = (expReview) => ({
-  type: 'EXP_REVIEW_UPDATE'
+  type: 'EXP_REVIEW_UPDATE',
   payload: expReview,
 })
 
 export const expReviewDelete = (expReview) => ({
-  type: 'EXP_REVIEW_DELETE'
+  type: 'EXP_REVIEW_DELETE',
   payload: expReview,
 })
 
@@ -35,7 +35,7 @@ export const expReviewFetchRequest = (expReview) => (dispatch, getState) => {
 
 export const expReviewCreateRequest = (expReview) => (dispatch, getState) => {
   let {auth} = getState()
-  return superagent.post(`${__API_URL__}/expReview`)
+  return superagent.post(`${__API_URL__}/user/${userId}/expReview`)
   .set('Authorization', `Bearer ${auth}`)
   .field('edibleName', expReview.edibleName)
   .field('lastMeal', expReview.lastMeal)
