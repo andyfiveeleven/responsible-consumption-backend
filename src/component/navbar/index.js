@@ -27,6 +27,7 @@ class Navbar extends React.Component {
     }
     this.validateRoute = this.validateRoute.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
   }
 
   componentDidMount(){
@@ -52,6 +53,9 @@ class Navbar extends React.Component {
   }
 
   handleLogin(user){
+    this.setState({
+      isLoggedIn: true
+    })
     let {profileFetch, history} = this.props
     return this.props.login(user)
     .then(() => this.props.profileFetch())
@@ -60,6 +64,9 @@ class Navbar extends React.Component {
   }
 
   handleLogout(){
+    this.setState({
+      isLoggedIn: null
+    })
     this.props.logout()
     this.props.history.push('/welcome')
   }
