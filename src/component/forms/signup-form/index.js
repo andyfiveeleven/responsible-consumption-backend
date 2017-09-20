@@ -1,12 +1,13 @@
 import React from 'react'
 import superagent from 'superagent'
+import OAuth from '../../OAuth/index'
 import {isEmail, isAlphanumeric, isAscii} from 'validator'
 import debounce from 'lodash/fp/debounce'
 
 import Tooltip from '../../tooltip/index'
 import * as util from '../../../lib/util'
 
-class AuthForm extends React.Component {
+class SignupForm extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -146,15 +147,6 @@ class AuthForm extends React.Component {
       usernameAvailable
     } = this.state
 
-    let AUTH_URL = 'https://accounts.google.com/o/oauth2/v2/auth';
-    let clientIDQuery = 'client_id=992654541300-hs25qc3ad12j4huiguqmuo74hmgksbqe.apps.googleusercontent.com';
-    let responseTypeQuery = 'response_type=code';
-    let scopeQuery = 'scope=openid%20profile%20email';
-    let promptQuery = 'prompt=consent';
-    let redirectURIQuery = 'redirect_uri=http://localhost:3000/oauth/google/code';
-
-    let formattedURI = `${AUTH_URL}?${clientIDQuery}&${responseTypeQuery}&${scopeQuery}&${promptQuery}&${redirectURIQuery}`
-
 
     return (
       <form
@@ -164,7 +156,7 @@ class AuthForm extends React.Component {
           'error': this.state.error && this.state.submitted,
         })}>
 
-        {util.renderIf(this.props.auth === 'signup',
+
           <div>
             <h2>signup.</h2>
             <Tooltip message={emailError} show={focused === 'email' || submitted} />
@@ -179,12 +171,11 @@ class AuthForm extends React.Component {
               onBlur={this.handleBlur}
               />
           </div>
-        )}
 
         {util.renderIf(this.props.auth === 'login',
           <div>
             <h2>login.</h2>
-            <a className='google' href={formattedURI}>login with google</a>
+            <OAuth />
           </div>
         )}
 
@@ -219,7 +210,7 @@ class AuthForm extends React.Component {
           />
 
           <button type='submit'>
-            {this.props.auth}
+            {this.props.buttonText}
           </button>
 
       </form>
@@ -227,4 +218,4 @@ class AuthForm extends React.Component {
   }
 }
 
-export default AuthForm
+export default SignupForm

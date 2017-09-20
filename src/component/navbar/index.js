@@ -1,13 +1,13 @@
-// import './_navbar.scss'
 import React from 'react'
 import {connect} from 'react-redux'
-import {Redirect, Link} from 'react-redux'
+import {Redirect, Link} from 'react-router-dom'
 
-import Avatar from '../avatar'
-import {tokenSet} from '../../actions/login-actions.js'
-import * as util from '../../lib/util.js'
+// import Icon from '../icon-component/index'
+import Avatar from '../avatar/index'
+import {tokenSet} from '../../actions/auth-actions'
+import * as util from '../../lib/util'
 import * as authActions from '../../actions/auth-actions'
-import {userProfileFetchRequest} from '../../actions/profile.js'
+import {profileFetchRequest} from '../../actions/profile-actions'
 
 let NavLink = (props) => (
   <li className={util.classToggler({selected: props.url === `/${props.route}` })} >
@@ -20,74 +20,78 @@ let NavLink = (props) => (
 class Navbar extends React.Component {
   constructor(props){
     super(props)
-    // this.validateRoute = this.validateRoute.bind(this)
+    this.validateRoute = this.validateRoute.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
   }
 
-  // componentDidMount(){
-  //   this.validate(this.props)
-  // }
-  //
-  // validateRoute(props){
-  //   let {match, history} = props
-  //   let token = util.readcookie(X-Token)
-  //   if(!token){
-  //     return history.replace('welcome/signup')
-  //   }
-  //
-  //   this.props.tokenSet(token)
-  //   this.props.userProfileFetch()
-  //   .catch(() => {
-  //     console.log(error)
-  //   })
-  // }
+  componentDidMount(){
+    this.validateRoute(this.props)
+  }
+
+  validateRoute(props){
+    let {match, history} = props
+    let token = util.readCookie('Special-Cookie')
+
+    if(!token){
+      return history.replace('/welcome')
+    }
+
+    this.props.tokenSet(token)
+    this.props.profileFetch()
+    .catch(() => {
+      console.log('PROFILE FETCH ERROR: user does not have a profile')
+      if(!match.url.startsWith('/settings')){
+        return history.replace('/settings')
+      }
+    })
+  }
 
   handleLogout(){
-    tis.props.logout()
-    this.props.history.push('/welcome/login')
+    this.props.logout()
+    this.props.history.push('/welcome')
   }
 
   render(){
     console.log('path', this.props.match)
-
-    //<Icon className='logo name='' />   ++++ ADD to return with icon
-    // <NavLink route='settings' url={url} />
-    // <NavLink route='dashboard' url={url} />
-
-
-    return(
+    let {url} = this.props.match
+    return (
       <header className='navbar'>
         <main>
         <h1>Responsible Consumption</h1>
 
         {util.renderIf(this.props.loggedIn,
-          <div className='panel>'>
+          <div className='panel'>
             <nav>
               <ul>
+                <NavLink route='settings' url={url} />
+                <NavLink route='dashboard' url={url} />
               </ul>
             </nav>
           </div>
         )}
+
         </main>
-        {util.renderIf(this.props.userProfile,
-          <Avatar profile={this.props.userprofile} />
-        )}
+
+        {util.renderIf(this.props.profile,
+          <Avatar profile={this.props.profile} />)}
 
         {util.renderIf(this.props.loggedIn,
-          <button onClick={this.handleLogout}>Logout</button>
+          <button onClick={this.handleLogout}>logout</button>
         )}
       </header>
     )
   }
 }
+
 let mapStateToProps = (state) => ({
   loggedIn: !!state.auth,
-  // userProfile: state.userProfile,
+  profile: state.profile,
 })
 
 let mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(authActions.logout()),
   tokenSet: (token) => dispatch(tokenSet(token)),
-  userprofileFetch: () => dispatch(userProfileFetchRequest()),
+  profileFetch: () => dispatch(profileFetchRequest()),
 })
+
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

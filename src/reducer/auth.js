@@ -1,11 +1,11 @@
 export default (state=null, action) => {
   let {type, payload} = action;
-  switch(type){
-    case 'COOKIE_CREATE':
-      return payload;
+  switch (type) {
+    case 'TOKEN_SET':
+      return payload
     case 'LOGOUT':
-      return null;
+      return null
     default:
-      return state;
+      return state
   }
-};
+}

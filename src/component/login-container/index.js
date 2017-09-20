@@ -52,14 +52,6 @@ class LoginContainer extends React.Component {
           onComplete={handleComplete}
           />
 
-        <div className='auth-nav'>
-          {util.renderIf(params.auth === 'login',
-            <Link to='/welcome/signup'> signup </Link>)}
-
-          {util.renderIf(params.auth === 'signup',
-            <Link to='/welcome/login'> login </Link>)}
-        </div>
-
       </div>
     )
   }
