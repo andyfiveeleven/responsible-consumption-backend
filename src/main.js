@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 
 import App from './component/app';
 import appStoreCreate from './lib/store-create.js';
+import CommentForm from './component/forms/comment-form/index'
 import './style/main.scss';
 
 const store = appStoreCreate();
