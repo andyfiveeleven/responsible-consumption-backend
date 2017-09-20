@@ -25,7 +25,7 @@ export const expReviewDelete = (expReview) => ({
 
 export const expReviewFetchRequest = (expReview) => (dispatch, getState) => {
   let {auth} = getState()
-  return superagent.get(`${__API_URL__}/expReview/me`) //TODO Build that route in the exp review. or find the "get all"
+  return superagent.get(`${__API_URL__}/api/expReview/me`) //TODO Build that route in the exp review. or find the "get all"
   .set('Authorization', `Bearer ${auth}`)
   .then(res => {
     dispatch(expReviewsSet(res.body.data))
@@ -35,7 +35,8 @@ export const expReviewFetchRequest = (expReview) => (dispatch, getState) => {
 
 export const expReviewCreateRequest = (expReview) => (dispatch, getState) => {
   let {auth} = getState()
-  return superagent.post(`${__API_URL__}/user/${userId}/expReview`)
+  console.log('ur posting')
+  return superagent.post(`${__API_URL__}/api/expReview`)
   .set('Authorization', `Bearer ${auth}`)
   .field('edibleName', expReview.edibleName)
   .field('lastMeal', expReview.lastMeal)
@@ -50,7 +51,7 @@ export const expReviewCreateRequest = (expReview) => (dispatch, getState) => {
 
 export const expReviewDeleteRequest = (expReview) => (dispatch, getState) => {
   let {auth} = getState()
-  return superagent.delete(`${__API_URL__}/expReview/${expReview._id}`)
+  return superagent.delete(`${__API_URL__}/api/expReview/${expReview._id}`)
   .set('Authorization', `Bearer ${auth}`)
   .then( res => {
     dispatch(expReviewDelete(expReview))
@@ -60,7 +61,7 @@ export const expReviewDeleteRequest = (expReview) => (dispatch, getState) => {
 
 export const expReviewUpdateRequest = (expReview) => (dispatch, getState) => {
   let {auth} = getState()
-  return superagent.put(`${__API_URL__}/expReview/${expReview._id}`)
+  return superagent.put(`${__API_URL__}/api/expReview/${expReview._id}`)
   .set('Authorization', `Bearer ${auth}`)
   .field('edibleName', expReview.edibleName)
   .field('lastMeal', expReview.lastMeal)
