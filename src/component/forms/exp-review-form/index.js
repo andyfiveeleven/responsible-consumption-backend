@@ -23,10 +23,11 @@ class ExpReviewForm extends React.Component {
   }
 
   handleChange(e){
+    e.preventDefault()
     let {name, value} = e.target
 
     if(name === 'edibleSearch'){
-        this.edibleDoesExist(value)
+        // this.edibleDoesExist(value)
     }
 
     if(name === 'edibleSelect'){
@@ -55,7 +56,7 @@ class ExpReviewForm extends React.Component {
 
   edibleDoesExist(edibleSearch){
     return superagent.get(`${__API_URL__}/api/edible/search/${edibleSearch}`)
-    .end((err, res) => {
+    .then((err, res) => {
       if(err) console.error(err);
       let edibleList = res.body;
       this.setState({edibleExists: true, edibleList: edibleList})
@@ -89,12 +90,10 @@ class ExpReviewForm extends React.Component {
               <h2>What is the name of your edible?</h2>
               <input
                 type='text'
-                name='edibleSearch'
+                name='edibleName'
                 placeholder='search an edible'
-                value={this.state.edibleSearch}
+                value={this.state.edibleName}
                 onChange={this.handleChange}
-                onFocus={this.handleFocus}
-                onBlur={this.handleBlur}
                 />
 
               {util.renderIf(this.state.edibleExists,

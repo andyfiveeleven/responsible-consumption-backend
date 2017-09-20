@@ -32,6 +32,7 @@ class DashboardContainer extends React.Component{
             .catch(console.error)
           }}
           />
+        {console.log('EXP REVIEWZZZZZZ', this.props.expReviews)}
         {this.props.expReviews.map(expReview =>
           <ExpReviewItem key={expReview._id} expReview={expReview} />
         )}
