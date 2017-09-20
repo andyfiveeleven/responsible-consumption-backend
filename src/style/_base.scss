@@ -1,0 +1,53 @@
+@import "vars";
+
+body {
+  background: $color-secondary;
+  font-family: $font-primary;
+}
+
+a{
+  text-decoration: none;
+  color: $color-black;
+}
+
+button {
+  border: none;
+  color: $color-white;
+  background: $btn-primary;
+  padding: $gutter-sm $gutter-lg;
+  border-radius: $boarder-radius;
+  cursor: pointer;
+  font-size: 2vw;
+  transition: $transition-primary;
+
+  &:hover{
+    color: $color-black;
+  }
+}
+
+input[type="text"] {
+  border-radius: $boarder-radius;
+  box-sizing: border-box;
+  padding: $gutter-sm;
+  width: 70%;
+  font-size: 2vw;
+  margin-bottom: $gutter-sm;
+}
+
+input[type="number"]{
+  border-radius: $boarder-radius;
+  box-sizing: border-box;;
+  padding: $gutter-sm;
+  margin-left: $gutter-sm;
+  width: 27%;
+  font-size: 2vw;
+  margin-bottom: $gutter-sm;
+}
+
+
+
+h2{
+  font-size: 3vw;
+  text-decoration: underline;
+  margin-bottom: $gutter-sm;
+}

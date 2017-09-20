@@ -23,6 +23,14 @@
  }
 }
 
+.rating__item::before {
+  font-size: 4vw;
+}
+
+span {
+  font-size: 3vw;
+}
+
 .rating:hover .rating__item::before {
  color: hotpink;
 }

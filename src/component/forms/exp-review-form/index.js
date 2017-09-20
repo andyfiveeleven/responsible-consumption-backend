@@ -14,6 +14,7 @@ class ExpReviewForm extends React.Component {
         reaction: 0,
         edibleThc: 0,
         selected: 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Cannabis_leaf.svg',
+        editing: false;
       }
 
     this.handleChange = this.handleChange.bind(this);
@@ -51,6 +52,9 @@ class ExpReviewForm extends React.Component {
     .then(() => {
       this.setState({edibleName: '', lastMeal: 1, dayDescription: '', reaction: 3, edibleThc: 3})
     })
+    .then(() => {
+      this.setState({editing:false})
+    })
   }
 
   edibleDoesExist(edibleSearch){
@@ -79,10 +83,10 @@ class ExpReviewForm extends React.Component {
 
   render(){
     return (
-      <div>
+      <div className='exp-review-form'>
+        <h2>Enter a new Experience</h2>
         <img src={this.state.selected[0].image}></img>
         <form
-          className='exp-review-form'
           onSubmit={this.handleSubmit}>
 
           <h2>What is the name of your edible?</h2>
