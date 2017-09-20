@@ -1,5 +1,3 @@
-'use strict';
-
 import superagent from 'superagent';
 
 export const profileCreate = (profile) => ({
@@ -7,9 +5,17 @@ export const profileCreate = (profile) => ({
   payload: profile
 });
 
+export const userProfileUpdate = (profile) => ({
+  type: 'USER_PROFILE_UPDATE',
+  payload: profile
+});
+
 export const profileCreateRequest = (profile) => (dispatch) => {
-  let token = document.cookie.findHash;
-  return superagent.post('https://responsible-consumption-stagin.herokuapp.com/profile')
+  console.log(profile);
+  let token = document.cookie.split('=')[1];
+
+  console.log('weeeeeeeeeeeeeeeeeeee', token);
+  return superagent.post(`${__API_URL__}/api/profile`)
   .set({Authorization: `Bearer ${token}`})
   .send(profile)
   .then((res) => {
@@ -17,3 +23,25 @@ export const profileCreateRequest = (profile) => (dispatch) => {
     return res;
   });
 };
+
+export const userProfileUpdateRequest = (profile) => (dispatch, getState) => {
+  let {auth} = getState()
+  return superagent.put(`${__API_URL__}/api/profiles/${profile._id}`)
+  .set({Authorization: `Bearer ${auth}`})
+  .field('bio', profile.bio)
+  .attach('avatar', profile.avatar)
+  .then(res => {
+    dispatch(userProfileCreate(res.body))
+    return res
+  })
+}
+
+export const userProfileFetchRequest = () => (dispatch, getState) => {
+  let {auth} = getState()
+  return superagent.get(`${__API_URL__}/profiles/me`)
+  .set({Authorization: `Bearer ${auth}`})
+  .then(res => {
+    dispatch(userProfileCreate(res.body))
+    return res
+  })
+}

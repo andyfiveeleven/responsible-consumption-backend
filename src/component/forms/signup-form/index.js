@@ -4,15 +4,10 @@ import OAuth from '../../OAuth/index'
 import {isEmail, isAlphanumeric, isAscii} from 'validator'
 import debounce from 'lodash/fp/debounce'
 
-
 import Tooltip from '../../tooltip/index'
 import * as util from '../../../lib/util'
-import {connect} from 'react-redux';
-import {Redirect} from 'react-router';
 
-import {signupRequest} from '../../../actions/login-actions.js';
-
-class LoginForm extends React.Component {
+class SignupForm extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -161,8 +156,28 @@ class LoginForm extends React.Component {
           'error': this.state.error && this.state.submitted,
         })}>
 
-            <h2>login</h2>
+
+          <div>
+            <h2>signup.</h2>
+            <Tooltip message={emailError} show={focused === 'email' || submitted} />
+            <input
+              className={util.classToggler({error: emailError})}
+              type='text'
+              name='email'
+              placeholder='email'
+              value={this.state.email}
+              onChange={this.handleChange}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur}
+              />
+          </div>
+
+        {util.renderIf(this.props.auth === 'login',
+          <div>
+            <h2>login.</h2>
             <OAuth />
+          </div>
+        )}
 
         <Tooltip message={usernameError} show={focused === 'username' || submitted}/>
         <input
@@ -203,4 +218,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm
+export default SignupForm
