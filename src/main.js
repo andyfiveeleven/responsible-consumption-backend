@@ -21,4 +21,4 @@ const AppContainer = () => {
   )
 };
 
-ReactDom.render(<ExpReviewForm/>,  document.getElementById('root'));
+ReactDom.render(<AppContainer/>,  document.getElementById('root'));

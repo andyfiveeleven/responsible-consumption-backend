@@ -6,7 +6,7 @@ import {Redirect, Link} from 'react-redux'
 import Avatar from '../avatar'
 import {tokenSet} from '../../actions/login-actions.js'
 import * as util from '../../lib/util.js'
-import * as authActions from '../../actions/auth.js'
+import * as authActions from '../../actions/auth-actions'
 import {userProfileFetchRequest} from '../../actions/profile.js'
 
 let NavLink = (props) => (

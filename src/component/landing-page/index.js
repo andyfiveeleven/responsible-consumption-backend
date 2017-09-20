@@ -19,7 +19,7 @@ class LandingPage extends React.Component{
     if(document.cookie){
       console.log('yes');
       superagent.get(`https://responsible-consumption-stagin.herokuapp.com/api/profile`)
-      .set({Authorization: `Bearer ${document.cookie.findHash}`})
+      .set({Authorization: `Bearer ${document.cookie.Special-Cookie}`})
       .end((err, res) => {
         if(err){
           this.setState({hasError: err.status});

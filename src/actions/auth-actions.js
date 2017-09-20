@@ -8,7 +8,7 @@ export const tokenSet = (token) => ({
 })
 
 export const logout = () => {
-  util.deleteCookie('X-Sluggram-Token')
+  util.deleteCookie('Special-Cookie')
   return { type: 'LOGOUT' }
 }
 
