@@ -4,9 +4,10 @@ import * as util from '../../../lib/util';
 class ProfileForm extends React.Component {
   constructor(props){
     super(props);
-    this.state = props.profile
-    ? {...props.profile, preview: ''}
-    : { bio: '', avatar: null, preview: ''}
+    this.state = {
+
+    }
+
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,7 +20,7 @@ class ProfileForm extends React.Component {
   }
 
   handleChange(e) {
-    let {type, name} = e.target;
+    let {type, name, value} = e.target;
 
     if(name === 'bio') {
       this.setState({bio: e.target.value})
@@ -33,6 +34,10 @@ class ProfileForm extends React.Component {
       .then(preview => this.setState({preview}))
       .catch(console.error)
     }
+
+    this.setState({
+      [name]: value,
+    })
   }
 
   handleSubmit(e) {
@@ -53,62 +58,37 @@ class ProfileForm extends React.Component {
         name='avatar'
         onChange={this.handleChange}
         />
+      <p className='profile-field-desc'>Enter in your: First Name</p>
+      <input
+        type='text'
+        name='firstname'
+        placeholder='enter first name'
+        value={this.state.firstname}
+        onChange={this.handleChange}
+        />
+      <p className='profile-field-desc'>Enter in your: Last Name</p>
+      <input
+        type='text'
+        name='lastname'
+        placeholder='enter last name'
+        value={this.state.lastname}
+        onChange={this.handleChange}
+        />
 
-        <p className='profile-field-desc'>Enter in your: Username</p>
-        <input
-          type='text'
-          name='userName'
-          placeholder='enter username'
-          value={this.state.userName}
-          onChange={this.handleChange}
-          />
-
-        <p className='profile-field-desc'>Enter in your: Password</p>
-        <input
-          type='password'
-          name='password'
-          placeholder='enter password'
-          value={this.state.password}
-          onChange={this.handleChange}
-          />
-        <p className='profile-field-desc'>Enter in your: Email</p>
-        <input
-          type='text'
-          name='Email'
-          placeholder='enter Email'
-          value={this.state.email}
-          onChange={this.handleChange}
-          />
         <p className='profile-field-desc'>Enter in your: Experience with cannibus products</p>
         <input
-          type='radio'
-          name='exp'
-          placeholder='enter username'
-          value={this.state.userName}
+          type='number'
+          name='experience'
+          placeholder='enter a number out of 10'
+          value={this.state.experience}
           onChange={this.handleChange}
           />
         <p className='profile-field-desc'>Enter in your: Current Weight</p>
         <input
           type='text'
-          name='userName'
+          name='weight'
           placeholder='enter username'
-          value={this.state.userName}
-          onChange={this.handleChange}
-          />
-        <p className='profile-field-desc'>Enter in your: First Name</p>
-        <input
-          type='text'
-          name='firstName'
-          placeholder='enter first name'
-          value={this.state.firstName}
-          onChange={this.handleChange}
-          />
-        <p className='profile-field-desc'>Enter in your: Last Name</p>
-        <input
-          type='text'
-          name='lastName'
-          placeholder='enter last name'
-          value={this.state.lastName}
+          value={this.state.weight}
           onChange={this.handleChange}
           />
       <button type='submit'>{this.props.buttonText}</button>

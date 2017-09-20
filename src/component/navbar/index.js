@@ -4,10 +4,12 @@ import {Redirect, Link} from 'react-router-dom'
 
 // import Icon from '../icon-component/index'
 import Avatar from '../avatar/index'
+import LoginForm from '../forms/LoginForm/index'
 import {tokenSet} from '../../actions/auth-actions'
 import * as util from '../../lib/util'
 import * as authActions from '../../actions/auth-actions'
-import {profileFetchRequest} from '../../actions/profile-actions'
+import {signupRequest, loginRequest} from '../../actions/auth-actions'
+import {userProfileFetchRequest} from '../../actions/profile-actions'
 
 let NavLink = (props) => (
   <li className={util.classToggler({selected: props.url === `/${props.route}` })} >
@@ -20,6 +22,9 @@ let NavLink = (props) => (
 class Navbar extends React.Component {
   constructor(props){
     super(props)
+    this.state = {
+      isLoggedIn: null
+    }
     this.validateRoute = this.validateRoute.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
   }
@@ -44,6 +49,14 @@ class Navbar extends React.Component {
         return history.replace('/settings')
       }
     })
+  }
+
+  handleLogin(user){
+    let {profileFetch, history} = this.props
+    return this.props.login(user)
+    .then(() => this.props.profileFetch())
+    .then(() => history.push('/dashboard'))
+    .catch(util.logError)
   }
 
   handleLogout(){
@@ -78,6 +91,13 @@ class Navbar extends React.Component {
         {util.renderIf(this.props.loggedIn,
           <button onClick={this.handleLogout}>logout</button>
         )}
+
+        {util.renderIf(this.state.isLoggedIn === null,
+          <LoginForm
+            onComplete={this.handleLogin}
+            buttonText= 'Login'
+          />
+        )}
       </header>
     )
   }
@@ -89,9 +109,11 @@ let mapStateToProps = (state) => ({
 })
 
 let mapDispatchToProps = (dispatch) => ({
+  signup: (user) => dispatch(signupRequest(user)),
+  login: (user) => dispatch(loginRequest(user)),
   logout: () => dispatch(authActions.logout()),
   tokenSet: (token) => dispatch(tokenSet(token)),
-  profileFetch: () => dispatch(profileFetchRequest()),
+  profileFetch: () => dispatch(userProfileFetchRequest()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

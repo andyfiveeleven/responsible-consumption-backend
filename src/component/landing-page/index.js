@@ -32,6 +32,7 @@ class LoginContainer extends React.Component {
   }
 
   handleSignup(user){
+    let {profileFetch, history} = this.props
     return this.props.signup(user)
     .then(() => {
       this.props.history.push('/settings')
@@ -49,6 +50,7 @@ class LoginContainer extends React.Component {
           onComplete={this.handleLogin}
           buttonText= 'Login'
         />
+
 
         <SignupForm
           onComplete={this.handleSignup}
