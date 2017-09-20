@@ -1,16 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import ExpReviewForm from '../../exp-review-form'
+import ExpReviewForm from '../forms/exp-review-form'
 import * as util from '../../lib/util.js'
-import * as expReviewActions from '../../action/exp-review-actions.js'
+import * as expReviewActions from '../../actions/exp-review-action.js'
 
 export class ExpReviewItem extends React.Component {
   constructor(props){
     super(props);
 
     this.state= {
-      editing: false;
+      editing: false
     }
 
     this.handleDelete = this.handleDelete.bind(this);
@@ -36,19 +36,25 @@ export class ExpReviewItem extends React.Component {
     return(
       <div>
         {util.renderIf(!this.state.editing,
-          <div>
-            <p className='use-date'> {expReview.date}</p>
-            <p className='edible-name'> {expReview.edibleName}</p>
-            <p className='edible-thc'> Edible thc content {expReview.edibleThc}</p>
+          <div className='exp-review-item'>
+            <div className='exp-item-head'>
+              <p className='use-date'> {expReview.date}</p>
+              <p className='edible-name'> {expReview.edibleName}</p>
+              <p className='edible-thc'>THC content {expReview.edibleThc}</p>
+            </div>
+            <p className='exp-rating'>Rating of Experience: {expReview.reaction}</p>
             <p className='meal-size'> Meal size: {expReview.lastMeal}</p>
             <p className='day-description'>Description of the day: {expReview.dayDescription}</p>
-            <p className='exp-rating'>Rating of Experience: {expReview.reaction}</p>
+            <button onClick={() => this.setState({editing: true})} className='edit-button'>Edit</button>
+            <button onClick={this.handleDelete} className='delete-button'>Delete</button>
+            <div className='clearfix'></div>
           </div>
         )}
 
         {util.renderIf(this.state.editing,
           <div>
             <ExpReviewForm
+              labelText='Edit your'
               expReview={this.props.expReview}
               buttonText='update experience'
               onComplete={this.handleUpdate}
@@ -69,4 +75,4 @@ let mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(ExpItem)
+)(ExpReviewItem)

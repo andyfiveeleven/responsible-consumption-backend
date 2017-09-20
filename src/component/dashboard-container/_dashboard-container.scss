@@ -1,0 +1,75 @@
+@import "vars";
+
+
+.dashboard-container {
+  padding: $gutter-sm;
+
+
+  .exp-review-form {
+    padding: $gutter-sm;
+    border: 1.5px solid $color-darkgrey;
+    background: $color-lightgrey;
+
+    .exp-review-rating-radio{
+      margin-top: $gutter-sm;
+    }
+
+    .exp-review-text-box {
+      margin-top: $gutter-sm;
+    }
+
+    button {
+      margin-top: $gutter-lg
+    }
+  }
+
+  .exp-review-item {
+    margin-top: $gutter-sm;
+    border: 1px solid $color-darkgrey;
+    border-radius: $boarder-radius;
+
+    .exp-item-head {
+      width: 100%;
+      background: $color-darkgrey;
+      border-radius: $boarder-radius;
+
+      p {
+        display: inline-block;
+        padding: $gutter-sm;
+        text-align: center;
+        font-size: 4vw;
+      }
+
+      .use-date{
+        width: 15%;
+        color: $color-white;
+      }
+
+      .edible-name {
+        width: 30%;
+        color: $color-black;
+        background: $color-lightgrey;
+      }
+
+      .edible-thc {
+        width: 38%;
+        color: $color-white;
+      }
+    }
+
+    .delete-button {
+      color: $color-error;
+      background: $color-darkgrey;
+      margin-right: $gutter-sm;
+      float: right;
+    }
+
+    .edit-button {
+      color: $color-success;
+      background: $color-darkgrey;
+      margin-left: $gutter-sm;
+      float: left;
+    }
+  }
+
+}
