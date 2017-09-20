@@ -14,7 +14,6 @@ class ExpReviewForm extends React.Component {
         reaction: 0,
         edibleThc: 0,
         selected: 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Cannabis_leaf.svg',
-        editing: false;
       }
 
     this.handleChange = this.handleChange.bind(this);
@@ -52,9 +51,6 @@ class ExpReviewForm extends React.Component {
     .then(() => {
       this.setState({edibleName: '', lastMeal: 1, dayDescription: '', reaction: 3, edibleThc: 3})
     })
-    .then(() => {
-      this.setState({editing:false})
-    })
   }
 
   edibleDoesExist(edibleSearch){
@@ -84,92 +80,94 @@ class ExpReviewForm extends React.Component {
   render(){
     return (
       <div className='exp-review-form'>
-        <h2>Enter a new Experience</h2>
-        <img src={this.state.selected[0].image}></img>
-        <form
-          onSubmit={this.handleSubmit}>
+          <div>
+            <h2>{this.props.labelText} Experience</h2>
 
-          <h2>What is the name of your edible?</h2>
-          <input
-            type='text'
-            name='edibleSearch'
-            placeholder='search an edible'
-            value={this.state.edibleSearch}
-            onChange={this.handleChange}
-            onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
-            />
+            <form
+              onSubmit={this.handleSubmit}>
 
-          {util.renderIf(this.state.edibleExists,
-            <select name="edibleSelect" form="commentForm" onChange={this.handleChange} onClick={this.handleClickOptions}>
-              <option>-Please select an edible-</option>
-              {this.state.options}
-            </select>)}
-          </form>
-          <form onSubmit={this.handleSubmit}>
-
-            {util.renderIf(this.state.selectedExists === true,
-            <div className='exp-review-text-box'>
+              <h2>What is the name of your edible?</h2>
               <input
-                name='edibleName'
                 type='text'
-                value={this.state.selected[0].name}
-                onChange={this.handleChange} />
-            </div>)}
-
-            <div className='exp-review-rating-radio'>
-              <h2>How much food have you eaten in the past 3 hours?</h2>
-              <Rating
-                name='lastMeal'
-                min={1}
-                max={5}
-                low='no food'
-                high='large meal'
-                onChange={(lastMeal) => this.setState({lastMeal})}
-                value={this.state.lastMeal}
+                name='edibleSearch'
+                placeholder='search an edible'
+                value={this.state.edibleSearch}
+                onChange={this.handleChange}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
                 />
-            </div>
 
-            <div className='exp-review-text-box'>
-              <h2>Describe your experience</h2>
-              <textarea
-                name='dayDescription'
-                type='text'
-                value={this.state.dayDescription}
-                onChange={this.handleChange}></textarea>
-            </div>
+              {util.renderIf(this.state.edibleExists,
+                <select name="edibleSelect" form="commentForm" onChange={this.handleChange} onClick={this.handleClickOptions}>
+                  <option>-Please select an edible-</option>
+                  {this.state.options}
+                </select>)}
+              </form>
+              <form onSubmit={this.handleSubmit}>
 
-            <div className='exp-review-rating-radio'>
-              <h2>How would you rate your experience?</h2>
-              <Rating
-                name='reaction'
-                low='poor'
-                high='excellent'
-                min={1}
-                max={5}
-                onChange={(reaction) => this.setState({reaction})}
-                value={this.state.reaction}
-                />
-            </div>
+                {util.renderIf(this.state.selectedExists === true,
+                <div className='exp-review-text-box'>
+                  <input
+                    name='edibleName'
+                    type='text'
+                    value={this.state.selected[0].name}
+                    onChange={this.handleChange} />
+                </div>)}
 
-            <div className='exp-review-rating-radio'>
-              <h2>How much thc does your edible contain?</h2>
-              <Rating
-                name='edibleThc'
-                min={1}
-                max={5}
-                label1='2.5mg'
-                label2='5mg'
-                label3='7.5mg'
-                label4='10mg'
-                label5='more than 10mg'
-                onChange={(edibleThc) => this.setState({edibleThc})}
-                value={this.state.edibleThc}
-                />
-            </div>
+                <div className='exp-review-rating-radio'>
+                  <h2>How much food have you eaten in the past 3 hours?</h2>
+                  <Rating
+                    name='lastMeal'
+                    min={1}
+                    max={5}
+                    low='no food'
+                    high='large meal'
+                    onChange={(lastMeal) => this.setState({lastMeal})}
+                    value={this.state.lastMeal}
+                    />
+                </div>
 
-            <button type='submit'> {this.props.buttonText} </button>
-          </form>
+                <div className='exp-review-text-box'>
+                  <h2>Describe your experience</h2>
+                  <textarea
+                    name='dayDescription'
+                    type='text'
+                    value={this.state.dayDescription}
+                    onChange={this.handleChange}></textarea>
+                </div>
+
+                <div className='exp-review-rating-radio'>
+                  <h2>How would you rate your experience?</h2>
+                  <Rating
+                    name='reaction'
+                    low='poor'
+                    high='excellent'
+                    min={1}
+                    max={5}
+                    onChange={(reaction) => this.setState({reaction})}
+                    value={this.state.reaction}
+                    />
+                </div>
+
+                <div className='exp-review-rating-radio'>
+                  <h2>How much thc does your edible contain?</h2>
+                  <Rating
+                    name='edibleThc'
+                    min={1}
+                    max={5}
+                    label1='2.5mg'
+                    label2='5mg'
+                    label3='7.5mg'
+                    label4='10mg'
+                    label5='more than 10mg'
+                    onChange={(edibleThc) => this.setState({edibleThc})}
+                    value={this.state.edibleThc}
+                    />
+                </div>
+
+                <button type='submit'> {this.props.buttonText} </button>
+              </form>
+            </div>
       </div>
     )
   }

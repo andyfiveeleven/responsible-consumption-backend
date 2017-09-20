@@ -14,6 +14,8 @@ class DashboardContainer extends React.Component{
   }
 
   componentDidMount(){
+    this.props.expReviewCreateBasic({date: '5/11/92', edibleName: 'brownie', edibleThc: '5mg', lastMeal: 'large meal'})
+    this.props.expReviewCreateBasic({date: '6/21/17', edibleName: 'Zoot Drops', edibleThc: '2.5mg', lastMeal: 'small meal', reaction: 5, dayDescription: 'went to the park with erin'})
     this.props.expReviewFetch()
     .catch(util.logError)
   }
@@ -23,14 +25,15 @@ class DashboardContainer extends React.Component{
       <div className='dashboard-container'>
         <h2>dashboard</h2>
         <ExpReviewForm
+          labelText='Enter a new'
           buttonText='post'
           onComplete={(expReview) => {
-            return this.props.ExpReveiwCreate(expReview)
+            return this.props.expReviewCreate(expReview)
             .catch(console.error)
           }}
           />
         {this.props.expReviews.map(expReview =>
-          <ExpReviewItem key={expReview._id} photo={photo} />
+          <ExpReviewItem key={expReview._id} expReview={expReview} />
         )}
       </div>
     )
@@ -45,6 +48,7 @@ let mapStateToProps = (state) => ({
 let mapDispatchToProps = (dispatch) => ({
   expReviewCreate: (expReview) => dispatch(expReviewActions.expReviewCreateRequest(expReview)),
   expReviewFetch: (expReview) => dispatch(expReviewActions.expReviewFetchRequest()),
+  expReviewCreateBasic: (expReview) => dispatch(expReviewActions.expReviewCreate(expReview)),
 })
 
 export default connect(

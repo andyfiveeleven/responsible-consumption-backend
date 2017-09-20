@@ -1,7 +1,11 @@
 @import "vars";
 
+.clearfix {
+  clear:both;
+}
+
 body {
-  background: $color-secondary;
+  background: $color-white;
   font-family: $font-primary;
 }
 
@@ -17,7 +21,7 @@ button {
   padding: $gutter-sm $gutter-lg;
   border-radius: $boarder-radius;
   cursor: pointer;
-  font-size: 2vw;
+  font-size: 3vw;
   transition: $transition-primary;
 
   &:hover{
@@ -47,7 +51,8 @@ input[type="number"]{
 
 
 h2{
-  font-size: 3vw;
-  text-decoration: underline;
+  font-size: 4vw;
+  width: 100%;
+  text-decoration: none;
   margin-bottom: $gutter-sm;
 }
