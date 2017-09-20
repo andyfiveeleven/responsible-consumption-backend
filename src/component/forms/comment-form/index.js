@@ -10,6 +10,7 @@ class CommentForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      edibleSearch: '',
       edibleName: '',
       title: '',
       commentBody: '',
@@ -31,7 +32,7 @@ class CommentForm extends React.Component {
       negativeDizzy: 0,
       negativeAnxious: 0,
 
-      edibleNameError: null,
+      edibleSearchError: null,
       titleError: null,
       commentBodyError: null,
       error: false,
@@ -58,7 +59,7 @@ class CommentForm extends React.Component {
 
 
     let errors = {
-      edibleNameError: this.state.titleError,
+      edibleSearchError: this.state.titleError,
       titleError: this.state.titleError,
       commentBodyError: this.state.commentBodyError,
     }
@@ -72,7 +73,7 @@ class CommentForm extends React.Component {
       errors[errorName] = null
     }
 
-    if(name === 'edibleName')
+    if(name === 'edibleSearch')
     if(!value)
     setError(name, `${placeholder} can not be empty`)
     else
@@ -92,7 +93,7 @@ class CommentForm extends React.Component {
 
     this.setState({
       ...errors,
-      error: !!(errors.edibleNameError || errors.titleError || errors.commentBodyError),
+      error: !!(errors.edibleSearchError || errors.titleError || errors.commentBodyError),
     })
   }
 
@@ -108,35 +109,29 @@ class CommentForm extends React.Component {
   }
 
   handleChange(e){
-    console.log('EVENT',e.target.name, e.target.value);
     let {name, value} = e.target
     this.validateInput({...e})
 
-    if(name === 'edibleName'){
-      console.log('ED',value);
+    if(name === 'edibleSearch'){
         this.edibleDoesExist(value)
     }
-
     if(name === 'edibleSelect'){
       let selected = this.state.edibleList.filter(edible => {
-        console.log('EDNAME',edible.name);
-        console.log(value);
-        return edible.name == value;
+        return edible.name === value;
       })
       this.setState({
-        selected: selected
+        selected: selected,
+        edibleExists: false
       })
-      console.log('FUCKMESHITBALLS', selected);
     }
-
     this.setState({
       [name]: value,
     })
   }
 
 
-  edibleDoesExist(edibleName){
-    return superagent.get(`${__API_URL__}/api/edible/search/${edibleName}`)
+  edibleDoesExist(edibleSearch){
+    return superagent.get(`${__API_URL__}/api/edible/search/${edibleSearch}`)
     .end((err, res) => {
       if(err) console.error(err);
       let edibleList = res.body;
@@ -154,7 +149,7 @@ class CommentForm extends React.Component {
       let option = <option key={item._id} value={item.name}>{item.name}</option>
       options.push(option);
     })
-    this.setState({ options })
+    this.setState({ options, selectedExists: true })
   }
 
 
@@ -166,7 +161,7 @@ class CommentForm extends React.Component {
       this.props.onComplete(this.state)
       .then(() => {
         this.setState({
-          edibleName: '',
+          edibleSearch: '',
           title: '',
           commentBody: '',
           effectRelaxed: 0,
@@ -187,7 +182,7 @@ class CommentForm extends React.Component {
           negativeDizzy: 0,
           negativeAnxious: 0,
 
-          edibleNameError: null,
+          edibleSearchError: null,
           titleError: null,
           commentBodyError: null,
           error: false,
@@ -207,7 +202,7 @@ class CommentForm extends React.Component {
     }
     this.setState(state => ({
       submitted: true,
-      edibleNameError: state.edibleNameError || state.edibleName ? null : 'required',
+      edibleSearchError: state.edibleSearchError || state.edibleSearch ? null : 'required',
       titleError: state.titleError || state.title ? null : 'required',
       commentBodyError: state.commentBodyError || state.commentBody ? null : 'required',
     }))
@@ -218,23 +213,24 @@ class CommentForm extends React.Component {
     let {
       focused,
       submitted,
-      edibleName,
+      edibleSearch,
       titleError,
       commentBodyError,
-      edibleNameError,
+      edibleSearchError,
       edibleExists
     } = this.state
 
     return(
       <div>
+        <img src={this.state.selected[0].image}></img>
         <form onSubmit={this.handleSubmit} id='commentForm'>
-          <Tooltip message={edibleNameError} show={focused === 'edibleName' || submitted} />
+          <Tooltip message={edibleSearchError} show={focused === 'edibleSearch' || submitted} />
           <input
-            className={util.classToggler({error: edibleNameError})}
+            className={util.classToggler({error: edibleSearchError})}
             type='text'
-            name='edibleName'
-            placeholder='edible name'
-            value={this.state.edibleName}
+            name='edibleSearch'
+            placeholder='search an edible'
+            value={this.state.edibleSearch}
             onChange={this.handleChange}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
@@ -245,13 +241,20 @@ class CommentForm extends React.Component {
               <option>-Please select an edible-</option>
               {this.state.options}
             </select>)}
-            <img src={this.state.selected[0].image}></img>
           </form>
           <form onSubmit={this.handleSubmit}>
 
 
-
-
+          {util.renderIf(this.state.selectedExists === true,
+          <input
+            className={util.classToggler({error: edibleSearchError})}
+            type='text'
+            name='edibleName'
+            value={this.state.selected[0].name}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            />)}
 
           <Tooltip message={titleError} show={focused === 'title' || submitted} />
           <input
