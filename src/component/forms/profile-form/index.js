@@ -101,7 +101,7 @@ class ProfileForm extends React.Component {
             min={1}
             max={5}
             onChange={(weight) => this.setState({ weight })}
-            value={this.state.effectRelaxed}
+            value={this.state.weight}
             />
         </div>
       <button type='submit'>{this.props.buttonText}</button>
