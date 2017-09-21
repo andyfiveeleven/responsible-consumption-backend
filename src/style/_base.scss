@@ -18,10 +18,10 @@ button {
   border: none;
   color: $color-white;
   background: $btn-primary;
-  padding: $gutter-sm $gutter-lg;
+  padding: $gutter-sm / 2 $gutter-lg / 1.5;
   border-radius: $boarder-radius;
   cursor: pointer;
-  font-size: 3vw;
+  font-size: 1.5vw;
   transition: $transition-primary;
 
   &:hover{
@@ -32,10 +32,19 @@ button {
 input[type="text"] {
   border-radius: $boarder-radius;
   box-sizing: border-box;
-  padding: $gutter-sm;
-  width: 70%;
-  font-size: 2vw;
-  margin-bottom: $gutter-sm;
+  padding: $gutter-sm / 2;
+  margin: $gutter-sm / 2 $gutter-lg / 1.5;
+  width: 20%;
+  font-size: 1.5vw;
+}
+
+input[type="password"] {
+  border-radius: $boarder-radius;
+  box-sizing: border-box;
+  padding: $gutter-sm / 2;
+  margin: $gutter-sm / 2 $gutter-lg / 1.5;
+  width: 20%;
+  font-size: 1.5vw;
 }
 
 input[type="number"]{
@@ -43,7 +52,7 @@ input[type="number"]{
   box-sizing: border-box;;
   padding: $gutter-sm;
   margin-left: $gutter-sm;
-  width: 27%;
+  width: 25%;
   font-size: 2vw;
   margin-bottom: $gutter-sm;
 }

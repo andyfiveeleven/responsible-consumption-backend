@@ -1,9 +1,9 @@
 import React from 'react'
 import superagent from 'superagent'
-import OAuth from '../../OAuth/index'
 import {isEmail, isAlphanumeric, isAscii} from 'validator'
 import debounce from 'lodash/fp/debounce'
 
+import './_signup.scss';
 import Tooltip from '../../tooltip/index'
 import * as util from '../../../lib/util'
 
@@ -152,62 +152,65 @@ class SignupForm extends React.Component {
       <form
         onSubmit={this.handleSubmit}
         className={util.classToggler({
-          'auth-form': true,
+          'signup-form': true,
           'error': this.state.error && this.state.submitted,
         })}>
 
+          <img src='http://localhost:8080/src/component/forms/signup-form/photo-1487552292919-eccbbd948cba.jpg' />
+          <section>
+            <h2>signup</h2>
+            <div>
+              <Tooltip message={emailError} show={focused === 'email' || submitted} />
+              <input
+                className={util.classToggler({error: emailError})}
+                type='text'
+                name='email'
+                placeholder='email'
+                value={this.state.email}
+                onChange={this.handleChange}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
+                />
+            </div>
 
+          {util.renderIf(this.props.auth === 'login',
+            <div>
+              <h2>login</h2>
+            </div>
+          )}
           <div>
-            <h2>signup.</h2>
-            <Tooltip message={emailError} show={focused === 'email' || submitted} />
+            <Tooltip message={usernameError} show={focused === 'username' || submitted}/>
             <input
-              className={util.classToggler({error: emailError})}
+              className={util.classToggler({error: usernameError || !usernameAvailable})}
               type='text'
-              name='email'
-              placeholder='email'
-              value={this.state.email}
+              name='username'
+              placeholder='username'
+              value={this.state.username}
               onChange={this.handleChange}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
               />
+            {util.renderIf(username,
+              <p className='username-available'>
+                {username} {usernameAvailable ? 'available': 'not available'}
+              </p>
+            )}
           </div>
 
-        {util.renderIf(this.props.auth === 'login',
           <div>
-            <h2>login.</h2>
-            <OAuth />
-          </div>
-        )}
-
-        <Tooltip message={usernameError} show={focused === 'username' || submitted}/>
-        <input
-          className={util.classToggler({error: usernameError || !usernameAvailable})}
-          type='text'
-          name='username'
-          placeholder='username'
-          value={this.state.username}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          />
-        {util.renderIf(username,
-          <p className='username-available'>
-            {username} {usernameAvailable ? 'available': 'not available'}
-          </p>
-        )}
-
-
-        <Tooltip message={passwordError} show={ focused === 'password' || submitted}/>
-        <input
-          className={util.classToggler({passwordError})}
-          type='password'
-          name='password'
-          placeholder='password'
-          value={this.state.password}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          />
+            <Tooltip message={passwordError} show={ focused === 'password' || submitted}/>
+            <input
+              className={util.classToggler({passwordError})}
+              type='password'
+              name='password'
+              placeholder='password'
+              value={this.state.password}
+              onChange={this.handleChange}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur}
+              />
+            </div>
+          </section>
 
           <button type='submit'>
             {this.props.buttonText}
