@@ -30,12 +30,26 @@ button {
 }
 
 input[type="text"] {
-  border-radius: $boarder-radius;
-  box-sizing: border-box;
-  padding: $gutter-sm;
+  margin: 0;
   width: 70%;
-  font-size: 2vw;
+  font-family: sans-serif;
+  appearance: none;
+  box-shadow: none;
+  border-radius: 1vw;
+  padding: $gutter-sm;
   margin-bottom: $gutter-sm;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+input[type="text"]:focus{
+  background-color: $color-darkgrey;
+  color: $color-white;
+  outline: none;
+  border: solid 1px #707070;
+  box-shadow: 0 0 5px 1px #969696;
+  transition: box-shadow 0.3s, border 0.3s;
+  transition: box-shadow 0.3s, border 0.3s;
+
 }
 
 input[type="number"]{
