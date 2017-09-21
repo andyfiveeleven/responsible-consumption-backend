@@ -30,6 +30,36 @@ button {
 }
 
 input[type="text"] {
+  font-family: sans-serif;
+  appearance: none;
+  box-shadow: none;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+  border-radius: $boarder-radius;
+  box-sizing: border-box;
+  padding: $gutter-sm / 2;
+  margin: $gutter-sm / 2 $gutter-lg / 1.5;
+  width: 20%;
+  font-size: 1.5vw;
+}
+input[type="text"]:focus{
+  background-color: $color-darkgrey;
+  color: $color-white;
+  outline: none;
+  border: solid 1px #707070;
+  box-shadow: 0 0 5px 1px #969696;
+  transition: box-shadow 0.3s, border 0.3s;
+  transition: box-shadow 0.3s, border 0.3s;
+
+
+}
+
+input[type="password"] {
+  font-family: sans-serif;
+  appearance: none;
+  box-shadow: none;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
   border-radius: $boarder-radius;
   box-sizing: border-box;
   padding: $gutter-sm / 2;
@@ -38,13 +68,16 @@ input[type="text"] {
   font-size: 1.5vw;
 }
 
-input[type="password"] {
-  border-radius: $boarder-radius;
-  box-sizing: border-box;
-  padding: $gutter-sm / 2;
-  margin: $gutter-sm / 2 $gutter-lg / 1.5;
-  width: 20%;
-  font-size: 1.5vw;
+input[type="password"]:focus{
+  background-color: $color-darkgrey;
+  color: $color-white;
+  outline: none;
+  border: solid 1px #707070;
+  box-shadow: 0 0 5px 1px #969696;
+  transition: box-shadow 0.3s, border 0.3s;
+  transition: box-shadow 0.3s, border 0.3s;
+
+
 }
 
 input[type="number"]{
