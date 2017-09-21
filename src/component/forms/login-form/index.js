@@ -4,8 +4,14 @@ import OAuth from '../../OAuth/index'
 import {isEmail, isAlphanumeric, isAscii} from 'validator'
 import debounce from 'lodash/fp/debounce'
 
+
 import Tooltip from '../../tooltip/index'
 import * as util from '../../../lib/util'
+import {connect} from 'react-redux';
+import {Redirect} from 'react-router';
+
+import {signupRequest} from '../../../actions/login-actions.js';
+
 
 class LoginForm extends React.Component {
   constructor(props){
@@ -100,8 +106,8 @@ class LoginForm extends React.Component {
     this.setState({
       [name]: value,
     })
-
   }
+
 
 
   handleSubmit(e){
@@ -149,6 +155,7 @@ class LoginForm extends React.Component {
 
             <h2>login</h2>
             <OAuth />
+
         <div>
 
           <input
@@ -174,6 +181,7 @@ class LoginForm extends React.Component {
             onBlur={this.handleBlur}
             />
         </div>
+
 
 
           <button type='submit'>

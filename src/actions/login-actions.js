@@ -15,9 +15,9 @@ export const signupRequest = (user) => (dispatch) => {
   return superagent.post(`${__API_URL__}/api/signup`)
   .withCredentials()
   .then((res) => {
-    dispatch(cookieCreate(res.body))
+    // dispatch(cookieCreate(res.body))
     try{
-      document.cookie = res.body.findHash
+      document.cookie = JSON.stringify(user);
     }catch(err){
       console.error(err);
     }
@@ -30,7 +30,9 @@ export const signinRequest = (user) => (dispatch) => {
   .withCredentials()
   .auth(user.username, user.password)
   .then((res) => {
-    dispatch(cookieCreate(res.body))
+    // dispatch(cookieCreate(res.body))
+    console.log(res);
+    document.cookie = JSON.stringify(res.body)
     return res;
   });
 };

@@ -4,7 +4,7 @@ import {Redirect, Link} from 'react-router-dom'
 
 // import Icon from '../icon-component/index'
 import Avatar from '../avatar/index'
-import LoginForm from '../forms/LoginForm/index'
+import LoginForm from '../forms/login-form/index'
 import {tokenSet} from '../../actions/auth-actions'
 import * as util from '../../lib/util'
 import * as authActions from '../../actions/auth-actions'
