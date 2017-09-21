@@ -3,7 +3,6 @@ import * as util from '../lib/util.js'
 
 // sync actions for updating store
 export const tokenSet = (token) => {
-  util.createCookie('Special-Cookie', token, 8);
   return {
     type: 'TOKEN_SET',
     payload: token
