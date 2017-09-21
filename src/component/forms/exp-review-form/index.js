@@ -82,7 +82,7 @@ class ExpReviewForm extends React.Component {
     return (
       <div className='exp-review-form'>
           <div>
-            <h2>{this.props.labelText} Experience</h2>
+            <h2 className='exp-title'>{this.props.labelText} Experience</h2>
 
             <form
               onSubmit={this.handleSubmit}>
@@ -91,7 +91,7 @@ class ExpReviewForm extends React.Component {
               <input
                 type='text'
                 name='edibleName'
-                placeholder='search an edible'
+                placeholder='name of edible'
                 value={this.state.edibleName}
                 onChange={this.handleChange}
                 />
@@ -127,8 +127,9 @@ class ExpReviewForm extends React.Component {
                 </div>
 
                 <div className='exp-review-text-box'>
-                  <h2>Describe your experience</h2>
+                  <h2>Notes about the day</h2>
                   <textarea
+                    className='day-description-box'
                     name='dayDescription'
                     type='text'
                     value={this.state.dayDescription}

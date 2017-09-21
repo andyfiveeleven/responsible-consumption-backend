@@ -40,11 +40,13 @@ export class ExpReviewItem extends React.Component {
             <div className='exp-item-head'>
               <p className='use-date'> {expReview.date}</p>
               <p className='edible-name'> {expReview.edibleName}</p>
-              <p className='edible-thc'>THC content {expReview.edibleThc}</p>
+              <p className='edible-thc'>THC content: {expReview.edibleThc}</p>
             </div>
-            <p className='exp-rating'>Rating of Experience: {expReview.reaction}</p>
-            <p className='meal-size'> Meal size: {expReview.lastMeal}</p>
-            <p className='day-description'>Description of the day: {expReview.dayDescription}</p>
+            <div className='exp-item-body'>
+              <p className='exp-rating'>Rating of Experience: {expReview.reaction} stars</p>
+              <p className='meal-size'> Meal size: {expReview.lastMeal}/5</p>
+              <p className='day-description'>Description of the day: {expReview.dayDescription}</p>
+            </div>
             <button onClick={() => this.setState({editing: true})} className='edit-button'>Edit</button>
             <button onClick={this.handleDelete} className='delete-button'>Delete</button>
             <div className='clearfix'></div>
