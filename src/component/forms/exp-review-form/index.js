@@ -50,7 +50,7 @@ class ExpReviewForm extends React.Component {
     console.log(this.state);
     return this.props.onComplete(this.state)
     .then(() => {
-      this.setState({edibleName: '', lastMeal: 1, dayDescription: '', reaction: 3, edibleThc: 3})
+      this.setState({edibleName: '', lastMeal: 0, dayDescription: '', reaction: 0, edibleThc: 0})
     })
   }
 
