@@ -8,11 +8,12 @@ class ExpReviewForm extends React.Component {
     super(props)
 
     this.state =
-      {edibleName: '',
-        lastMeal: 0,
-        dayDescription: '',
-        reaction: 0,
-        edibleThc: 0,
+      {edibleName: props.expReview ? props.expReview.edibleName : '',
+        lastMeal: props.expReview ? props.expReview.lastMeal : 0,
+        description: props.expReview ? props.expReview.description : '',
+        reaction: props.expReview ? props.expReview.reaction : 0,
+        edibleThc: props.expReview ? props.expReview.edibleThc : 0,
+        dosage: props.expReview ? props.expReview.dosage : 0,
         selected: 'https://upload.wikimedia.org/wikipedia/commons/a/a8/Cannabis_leaf.svg',
       }
 
@@ -47,7 +48,7 @@ class ExpReviewForm extends React.Component {
 
   handleSubmit(e){
     e.preventDefault()
-    console.log(this.state);
+    console.log('STATESHIT',this.state);
     return this.props.onComplete(this.state)
     .then(() => {
       this.setState({edibleName: '', lastMeal: 0, dayDescription: '', reaction: 0, edibleThc: 0})
@@ -129,9 +130,9 @@ class ExpReviewForm extends React.Component {
                 <div className='exp-review-text-box'>
                   <h2>Describe your experience</h2>
                   <textarea
-                    name='dayDescription'
+                    name='description'
                     type='text'
-                    value={this.state.dayDescription}
+                    value={this.state.description}
                     onChange={this.handleChange}></textarea>
                 </div>
 

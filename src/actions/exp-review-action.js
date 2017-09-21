@@ -57,15 +57,13 @@ export const expReviewDeleteRequest = (expReview) => (dispatch, getState) => {
 }
 
 export const expReviewUpdateRequest = (expReview) => (dispatch, getState) => {
+  console.log('GET STATE', expReview);
   let token = document.cookie.split('=')[1];
   return superagent.put(`${__API_URL__}/api/expReview/${expReview._id}`)
   .set('Authorization', `Bearer ${token}`)
-  .field('edibleName', expReview.edibleName)
-  .field('lastMeal', expReview.lastMeal)
-  .field('dayDescription', expReview.dayDescription)
-  .field('reaction', expReview.reaction)
-  .field('edibleThc', expReview.edibleThc)
+  .send(expReview)
   .then( res => {
+    console.log('RESBODY',res.body);
     dispatch(expReviewUpdate(res.body))
     return res
   })
