@@ -96,7 +96,7 @@ class ProfileForm extends React.Component {
             label2 = '   110 - 150 lbs'
             label3 = '   150 - 190 lbs'
             label4 = '   190 - 230 lbs'
-            label5 = '   230 lbs'
+            label5 = '   230+ lbs'
             name='weight'
             min={1}
             max={5}
