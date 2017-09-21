@@ -14,8 +14,6 @@ class DashboardContainer extends React.Component{
   }
 
   componentDidMount(){
-    this.props.expReviewCreateBasic({date: '5/11/92', edibleName: 'brownie', edibleThc: '5mg', lastMeal: '5'})
-    this.props.expReviewCreateBasic({date: '6/21/17', edibleName: 'Zoot Drops', edibleThc: '2.5mg', lastMeal: '3', reaction: 5, dayDescription: 'went to the park with erin, it was a lovely day, she had a little too and we were happy about it'})
     this.props.expReviewFetch()
     .catch(util.logError)
   }
@@ -26,10 +24,7 @@ class DashboardContainer extends React.Component{
         <ExpReviewForm
           labelText='Enter a new'
           buttonText='post'
-          onComplete={(expReview) => {
-            return this.props.expReviewCreate(expReview)
-            .catch(console.error)
-          }}
+          onComplete={this.props.expReviewCreate}
           />
         {console.log('EXP REVIEWZZZZZZ', this.props.expReview)}
         {this.props.expReview.map(expReview =>
