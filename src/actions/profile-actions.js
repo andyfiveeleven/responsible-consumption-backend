@@ -37,9 +37,9 @@ export const userProfileUpdateRequest = (profile) => (dispatch, getState) => {
 }
 
 export const userProfileFetchRequest = () => (dispatch, getState) => {
-  let {auth} = getState()
+  let token = document.cookie.split('=')[1];
   return superagent.get(`${__API_URL__}/profiles/me`)
-  .set({Authorization: `Bearer ${auth}`})
+  .set({Authorization: `Bearer ${token}`})
   .then(res => {
     dispatch(userProfileCreate(res.body))
     return res

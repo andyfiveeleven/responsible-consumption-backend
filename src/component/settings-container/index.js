@@ -1,4 +1,5 @@
 import React from 'react'
+import { Route, Redirect } from 'react-router'
 import {connect} from 'react-redux'
 import ProfileForm from '../forms/profile-form/index'
 import {

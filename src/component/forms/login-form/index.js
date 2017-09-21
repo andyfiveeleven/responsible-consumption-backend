@@ -12,6 +12,7 @@ import {Redirect} from 'react-router';
 
 import {signupRequest} from '../../../actions/login-actions.js';
 
+
 class LoginForm extends React.Component {
   constructor(props){
     super(props)
@@ -33,7 +34,6 @@ class LoginForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleFocus = this.handleFocus.bind(this)
-    this.usernameCheckAvailable = debounce(50)(this.usernameCheckAvailable.bind(this))
   }
 
   validateInput(e){
@@ -106,17 +106,9 @@ class LoginForm extends React.Component {
     this.setState({
       [name]: value,
     })
-
-    if(this.props.auth === 'signup' && name === 'username'){
-      this.usernameCheckAvailable(value)
-    }
   }
 
-  usernameCheckAvailable(username){
-    return superagent.get(`${__API_URL__}/usernames/${username}`)
-    .then(() => this.setState({usernameAvailable: false}))
-    .catch(() => this.setState({usernameAvailable: true}))
-  }
+
 
   handleSubmit(e){
     e.preventDefault()
@@ -164,35 +156,33 @@ class LoginForm extends React.Component {
             <h2>login</h2>
             <OAuth />
 
-        <Tooltip message={usernameError} show={focused === 'username' || submitted}/>
-        <input
-          className={util.classToggler({error: usernameError || !usernameAvailable})}
-          type='text'
-          name='username'
-          placeholder='username'
-          value={this.state.username}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          />
-        {util.renderIf(username,
-          <p className='username-available'>
-            {username} {usernameAvailable ? 'available': 'not available'}
-          </p>
-        )}
+        <div>
+
+          <input
+            type='text'
+            name='username'
+            placeholder='username'
+            value={this.state.username}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            />
+        </div>
+
+        <div>
+
+          <input
+            type='password'
+            name='password'
+            placeholder='password'
+            value={this.state.password}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            />
+        </div>
 
 
-        <Tooltip message={passwordError} show={ focused === 'password' || submitted}/>
-        <input
-          className={util.classToggler({passwordError})}
-          type='password'
-          name='password'
-          placeholder='password'
-          value={this.state.password}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          />
 
           <button type='submit'>
             {this.props.buttonText}
