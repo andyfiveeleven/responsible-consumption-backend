@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link, Redirect} from 'react-router-dom'
+import {Link, Route, Redirect} from 'react-router-dom'
 
 import SignupForm from '../forms/signup-form/index'
 import LoginForm from '../forms/LoginForm/index'
@@ -12,24 +12,16 @@ class LoginContainer extends React.Component {
   constructor(props){
     super(props)
 
-    this.handleLogin = this.handleLogin.bind(this)
     this.handleSignup = this.handleSignup.bind(this)
   }
 
   componentWillReceiveProps(props){
     if(props.auth && props.profile)
-      props.history.replace('/dashboard')
+    props.history.replace('/dashboard')
     if(props.auth && !props.profile)
-      props.history.replace('/settings')
+    props.history.replace('/settings')
   }
 
-  handleLogin(user){
-    let {profileFetch, history} = this.props
-    return this.props.login(user)
-    .then(() => profileFetch())
-    .then(() => history.push('/dashboard'))
-    .catch(util.logError)
-  }
 
   handleSignup(user){
     let {profileFetch, history} = this.props
@@ -56,20 +48,20 @@ class LoginContainer extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => ({
-  auth: state.auth,
-  profile: state.profile,
-})
+  let mapStateToProps = (state) => ({
+    auth: state.auth,
+    profile: state.profile,
+  })
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    signup: (user) => dispatch(signupRequest(user)),
-    login: (user) => dispatch(loginRequest(user)),
-    profileFetch: () => dispatch(profileFetchRequest()),
+  let mapDispatchToProps = (dispatch) => {
+    return {
+      signup: (user) => dispatch(signupRequest(user)),
+      login: (user) => dispatch(loginRequest(user)),
+      profileFetch: () => dispatch(profileFetchRequest()),
+    }
   }
-}
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginContainer)
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(LoginContainer)

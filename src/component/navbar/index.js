@@ -52,6 +52,7 @@ class Navbar extends React.Component {
     })
   }
 
+
   handleLogin(user){
     this.setState({
       isLoggedIn: true

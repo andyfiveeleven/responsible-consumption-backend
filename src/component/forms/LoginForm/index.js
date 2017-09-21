@@ -101,9 +101,6 @@ class LoginForm extends React.Component {
       [name]: value,
     })
 
-    if(this.props.auth === 'signup' && name === 'username'){
-      this.usernameCheckAvailable(value)
-    }
   }
 
 
