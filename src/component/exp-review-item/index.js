@@ -24,6 +24,8 @@ export class ExpReviewItem extends React.Component {
   }
 
   handleUpdate(expReview){
+    expReview._id = this.props.expReview._id
+    console.log('WHOLEBUNCHOFSHIT',expReview);
     return this.props.updateExpReview(expReview)
     .then(() => {
       this.setState({editing:false})
@@ -50,6 +52,7 @@ export class ExpReviewItem extends React.Component {
               <p className='meal-size'> Meal size: {expReview.lastMeal}/5</p>
               <p className='day-description'>Description of the day: {expReview.description}</p>
             </div>
+      
             <button onClick={() => this.setState({editing: true})} className='edit-button'>Edit</button>
             <button onClick={this.handleDelete} className='delete-button'>Delete</button>
             <div className='clearfix'></div>
@@ -74,7 +77,7 @@ export class ExpReviewItem extends React.Component {
 let mapStateToProps=() => ({})
 let mapDispatchToProps = (dispatch) => ({
   deleteExpReview: (expReview) => dispatch(expReviewActions.expReviewDeleteRequest(expReview)),
-  updateExpReview: (expReview) => dispatch(expReviewAction.expReviewUpdateRequest(expReview)),
+  updateExpReview: (expReview) => dispatch(expReviewActions.expReviewUpdateRequest(expReview)),
 })
 
 export default connect(
