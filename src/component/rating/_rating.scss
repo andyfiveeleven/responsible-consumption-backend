@@ -32,7 +32,7 @@ span {
 }
 
 .rating:hover .rating__item::before {
- color: hotpink;
+ color: #21b1ff;
 }
 
 .rating__item:hover ~ .rating__item::before {
@@ -40,5 +40,5 @@ span {
 }
 
 .rating__item--selected::before {
- color: hotpink;
+ color: #21b1ff;
 }

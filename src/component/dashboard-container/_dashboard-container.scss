@@ -2,20 +2,37 @@
 
 
 .dashboard-container {
-  padding: $gutter-sm;
-
+  background: $color-lightgrey;
 
   .exp-review-form {
     padding: $gutter-sm;
     border: 1.5px solid $color-darkgrey;
-    background: $color-lightgrey;
+    background: $color-white;
+
+    .exp-title {
+      font-size: 5vw;
+    }
+
+    h2 {
+      margin-bottom: 0px;
+      margin-top: 2.5vw;
+    }
 
     .exp-review-rating-radio{
       margin-top: $gutter-sm;
     }
 
+    .rating {
+      margin-left: $gutter-sm;
+    }
+
     .exp-review-text-box {
       margin-top: $gutter-sm;
+    }
+
+    textarea.day-description-box {
+      width: 90%;
+      height: 15vw;
     }
 
     button {
@@ -30,8 +47,8 @@
 
     .exp-item-head {
       width: 100%;
-      background: $color-darkgrey;
       border-radius: $boarder-radius;
+      border-bottom: 2px solid $color-darkgrey;
 
       p {
         display: inline-block;
@@ -42,6 +59,7 @@
 
       .use-date{
         width: 15%;
+        background: $color-darkgrey;
         color: $color-white;
       }
 
@@ -49,11 +67,19 @@
         width: 30%;
         color: $color-black;
         background: $color-lightgrey;
+        border-right: 1px solid $color-darkgrey;
       }
 
       .edible-thc {
         width: 38%;
-        color: $color-white;
+      }
+    }
+
+    .exp-item-body {
+      font-size: 4vw;
+
+      p {
+        padding: $gutter-sm;
       }
     }
 
@@ -62,6 +88,7 @@
       background: $color-darkgrey;
       margin-right: $gutter-sm;
       float: right;
+      margin-bottom: $gutter-sm;
     }
 
     .edit-button {
@@ -69,7 +96,7 @@
       background: $color-darkgrey;
       margin-left: $gutter-sm;
       float: left;
+      margin-bottom: $gutter-sm;
     }
   }
-
 }

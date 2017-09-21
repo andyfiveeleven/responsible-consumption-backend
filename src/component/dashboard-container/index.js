@@ -14,7 +14,6 @@ class DashboardContainer extends React.Component{
   }
 
   componentDidMount(){
-    console.log('MOUNTED');
     this.props.expReviewFetch()
     .catch(util.logError)
   }
@@ -22,7 +21,6 @@ class DashboardContainer extends React.Component{
   render(){
     return(
       <div className='dashboard-container'>
-        <h2>dashboard</h2>
         <ExpReviewForm
           labelText='Enter a new'
           buttonText='post'

@@ -2,10 +2,13 @@ import superagent from 'superagent'
 import * as util from '../lib/util.js'
 
 // sync actions for updating store
-export const tokenSet = (token) => ({
-  type: 'TOKEN_SET',
-  payload: token,
-})
+export const tokenSet = (token) => {
+  util.createCookie('Special-Cookie', token, 8);
+  return {
+    type: 'TOKEN_SET',
+    payload: token
+  }
+}
 
 export const logout = () => {
   util.deleteCookie('Special-Cookie')
@@ -19,7 +22,7 @@ export const signupRequest =  (user) => (dispatch) => {
   .send(user)
   .then(res => {
     dispatch(tokenSet(res.text))
-    //res.text === toke
+    // res.text === toke
     try {
       localStorage.token = res.text
     } catch (error) {
