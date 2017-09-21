@@ -1,13 +1,12 @@
-// import './_navbar.scss'
 import React from 'react'
 import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-redux'
 
-import Avatar from '../avatar'
-import {tokenSet} from '../../actions/login-actions.js'
+// import {tokenSet} from '../../actions/login-actions.js'
+import Avatar from '../avatar';
 import * as util from '../../lib/util.js'
-import * as authActions from '../../actions/auth.js'
-import {userProfileFetchRequest} from '../../actions/profile.js'
+import * as authActions from '../../actions/login-actions.js'
+import {userProfileFetchRequest} from '../../actions/profile-actions.js'
 
 let NavLink = (props) => (
   <li className={util.classToggler({selected: props.url === `/${props.route}` })} >
@@ -20,9 +19,10 @@ let NavLink = (props) => (
 class Navbar extends React.Component {
   constructor(props){
     super(props)
-    // this.validateRoute = this.validateRoute.bind(this)
-    this.handleLogout = this.handleLogout.bind(this)
-  }
+    this.state = {
+
+    };
+  };
 
   // componentDidMount(){
   //   this.validate(this.props)
@@ -43,7 +43,7 @@ class Navbar extends React.Component {
   // }
 
   handleLogout(){
-    tis.props.logout()
+    this.props.logout();
     this.props.history.push('/welcome/login')
   }
 
@@ -80,14 +80,14 @@ class Navbar extends React.Component {
     )
   }
 }
-let mapStateToProps = (state) => ({
-  loggedIn: !!state.auth,
-  // userProfile: state.userProfile,
-})
+const mapStateToProps = (state) => ({
+  isLoggedIn: !!state.auth,
+});
 
-let mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
   logout: () => dispatch(authActions.logout()),
   tokenSet: (token) => dispatch(tokenSet(token)),
   userprofileFetch: () => dispatch(userProfileFetchRequest()),
-})
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

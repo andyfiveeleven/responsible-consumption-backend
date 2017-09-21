@@ -7,6 +7,11 @@ export const profileCreate = (profile) => ({
   payload: profile
 });
 
+export const userProfileUpdate = (profile) => ({
+  type: 'USER_PROFILE_UPDATE',
+  payload: profile
+});
+
 export const profileCreateRequest = (profile) => (dispatch) => {
   let token = document.cookie.findHash;
   return superagent.post('https://responsible-consumption-stagin.herokuapp.com/profile')

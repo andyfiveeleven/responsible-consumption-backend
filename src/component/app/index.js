@@ -1,5 +1,6 @@
 'use strict';
 
+import './style.scss';
 import React from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
