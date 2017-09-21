@@ -17,7 +17,7 @@ let store = appStoreCreate();
 let AppContainer = () => {
   return(
     <Provider store={store}>
-      <DashboardContainer />
+      <App />
     </Provider>
   )
 };

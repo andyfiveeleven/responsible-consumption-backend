@@ -32,8 +32,8 @@ class DashboardContainer extends React.Component{
             .catch(console.error)
           }}
           />
-        {console.log('EXP REVIEWZZZZZZ', this.props.expReviews)}
-        {this.props.expReviews.map(expReview =>
+        {console.log('EXP REVIEWZZZZZZ', this.props.expReview)}
+        {this.props.expReview.map(expReview =>
           <ExpReviewItem key={expReview._id} expReview={expReview} />
         )}
       </div>
@@ -43,7 +43,7 @@ class DashboardContainer extends React.Component{
 
 let mapStateToProps = (state) => ({
   userProfile: state.userProfile,
-  expReviews: state.expReviews,
+  expReview: state.expReview,
 })
 
 let mapDispatchToProps = (dispatch) => ({

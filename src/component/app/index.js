@@ -6,7 +6,7 @@ import {BrowserRouter, Route, Link} from 'react-router-dom';
 import Navbar from '../navbar/index';
 import * as util from '../../lib/util';
 import LandingContainer from '../landing-page/index';
-import Dashboard from '../dashboard/index';
+import Dashboard from '../dashboard-container/index';
 import SettingsContainer from '../settings-container/index';
 import {tokenSet} from '../../actions/auth-actions';
 import {profileFetchRequest} from '../../actions/profile-actions'
