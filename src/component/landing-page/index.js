@@ -45,7 +45,7 @@ class LoginContainer extends React.Component {
 
     return (
       <div className='landing-container'>
-        
+
         <SignupForm
           onComplete={this.handleSignup}
           buttonText= 'Sign Up'

@@ -15,18 +15,72 @@ class LoginForm extends React.Component {
       username: '',
       password: '',
       emailError: null,
+      usernameError: null,
       usernameAvailable: true,
+      passwordError: null,
       focused: null,
       error: false,
       submitted: false,
     }
 
+    this.validateInput = this.validateInput.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleFocus = this.handleFocus.bind(this)
   }
 
+  validateInput(e){
+    let {name, value} = e.target
+
+    let errors = {
+      emailError: this.state.emailError,
+      passwordError: this.state.passwordError,
+      usernameError: this.state.usernameError,
+    }
+
+    let setError = (name, error) => {
+      let errorName = `${name}Error`
+      errors[errorName] = error
+    }
+    let deleteError = (name) => {
+      let errorName = `${name}Error`
+      errors[errorName] = null
+    }
+
+    if(name === 'email')
+      if(!value)
+        setError(name, `${name} can not be empty`)
+      else if(!isEmail(value))
+        setError(name, `${value} is not a valid email`)
+      else
+        deleteError(name)
+
+    if(name === 'username'){
+      if(!value)
+        setError(name, `${name} can not be empty`)
+      else if(!isAlphanumeric(value))
+        setError(name, `username may only contain letters and numbers`)
+      else if(value.length < 8)
+        setError(name, `username must be 8 characters`)
+      else deleteError(name)
+    }
+
+    if(name === 'password'){
+      if(!value)
+        setError(name, `${name} can not be empty`)
+      else if(!isAscii(value))
+        setError(name, `password may only contain normal characters`)
+      else if(value.length < 8)
+        setError(name, `password must be 8 characters`)
+      else deleteError(name)
+    }
+
+    this.setState({
+      ...errors,
+      error: !!(errors.emailError || errors.usernameError || errors.passwordError),
+    })
+  }
 
   handleFocus(e){
     this.setState({ focused: e.target.name })
@@ -46,8 +100,11 @@ class LoginForm extends React.Component {
     this.setState({
       [name]: value,
     })
-  }
 
+    if(this.props.auth === 'signup' && name === 'username'){
+      this.usernameCheckAvailable(value)
+    }
+  }
 
 
   handleSubmit(e){
@@ -55,7 +112,7 @@ class LoginForm extends React.Component {
     if(!this.state.error){
       this.props.onComplete(this.state)
       .then(() => {
-        this.setState({username: '', password: ''})
+        this.setState({username: '', email: '', password: ''})
       })
       .catch(error => {
         console.error(error)
@@ -65,6 +122,12 @@ class LoginForm extends React.Component {
         })
       })
     }
+    this.setState(state => ({
+      submitted: true,
+      usernameError: state.usernameError || state.username ? null : 'required',
+      emailError: state.emailError || state.email ? null : 'required',
+      passwordError: state.passwordError || state.password ? null : 'required',
+    }))
   }
 
   render(){
@@ -72,6 +135,10 @@ class LoginForm extends React.Component {
       focused,
       submitted,
       username,
+      emailError,
+      passwordError,
+      usernameError,
+      usernameAvailable
     } = this.state
 
 
@@ -85,27 +152,32 @@ class LoginForm extends React.Component {
 
             <h2>login</h2>
             <OAuth />
+        <div>
 
-        <input
-          type='text'
-          name='username'
-          placeholder='username'
-          value={this.state.username}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          />
+          <input
+            type='text'
+            name='username'
+            placeholder='username'
+            value={this.state.username}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            />
+        </div>
 
+        <div>
 
-        <input
-          type='password'
-          name='password'
-          placeholder='password'
-          value={this.state.password}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          />
+          <input
+            type='password'
+            name='password'
+            placeholder='password'
+            value={this.state.password}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}
+            onBlur={this.handleBlur}
+            />
+        </div>
+
 
           <button type='submit'>
             {this.props.buttonText}
