@@ -9,6 +9,7 @@ import App from './component/app';
 import ExpReviewForm from './component/forms/exp-review-form';
 import appStoreCreate from './lib/store-create.js';
 import DashboardContainer from './component/dashboard-container'
+import Navbar from './component/navbar'
 import CommentForm from './component/forms/comment-form/index'
 import './style/main.scss';
 

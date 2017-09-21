@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Redirect, Link} from 'react-router-dom'
 
 // import Icon from '../icon-component/index'
+import './_navbar.scss';
 import Avatar from '../avatar/index'
 import LoginForm from '../forms/login-form/index'
 import {tokenSet} from '../../actions/auth-actions'
@@ -22,9 +23,6 @@ let NavLink = (props) => (
 class Navbar extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-      isLoggedIn: null
-    }
     this.validateRoute = this.validateRoute.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
@@ -66,7 +64,7 @@ class Navbar extends React.Component {
 
   handleLogout(){
     this.setState({
-      isLoggedIn: null
+      loggedIn: null
     })
     this.props.logout()
     this.props.history.push('/welcome')
@@ -78,7 +76,7 @@ class Navbar extends React.Component {
     return (
       <header className='navbar'>
         <main>
-        <h1>Responsible Consumption</h1>
+        <h1 id='title'>Responsible Consumption</h1>
 
         {util.renderIf(this.props.loggedIn,
           <div className='panel'>
@@ -100,7 +98,7 @@ class Navbar extends React.Component {
           <button onClick={this.handleLogout}>logout</button>
         )}
 
-        {util.renderIf(this.state.isLoggedIn === null,
+        {util.renderIf(!this.props.loggedIn,
           <LoginForm
             onComplete={this.handleLogin}
             buttonText= 'Login'
