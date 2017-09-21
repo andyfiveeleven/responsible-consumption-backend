@@ -1,10 +1,9 @@
 import React from 'react'
 import superagent from 'superagent'
-import OAuth from '../../OAuth/index'
 import {isEmail, isAlphanumeric, isAscii} from 'validator'
 import debounce from 'lodash/fp/debounce'
 
-
+import './_login.scss';
 import Tooltip from '../../tooltip/index'
 import * as util from '../../../lib/util'
 import {connect} from 'react-redux';
@@ -152,13 +151,10 @@ class LoginForm extends React.Component {
           'auth-form': true,
           'error': this.state.error && this.state.submitted,
         })}>
-
-            <h2>login</h2>
-            <OAuth />
-
         <div>
 
           <input
+            className='login'
             type='text'
             name='username'
             placeholder='username'
@@ -172,6 +168,7 @@ class LoginForm extends React.Component {
         <div>
 
           <input
+            className='login'
             type='password'
             name='password'
             placeholder='password'
