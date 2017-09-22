@@ -1,0 +1,123 @@
+@import "vars";
+
+
+.dashboard-container {
+  background: $color-lightgrey;
+
+  .exp-review-form {
+    padding: $gutter-sm;
+    border: 1.5px solid $color-darkgrey;
+    background: $color-white;
+
+    input[type="text"] {
+      padding: 2.5vw;
+      font-size: 3vw;
+      width: 50vw;
+      margin: 0;
+      margin-top: 1vw;
+    }
+
+    .tall span {
+      font-size: 3vw;
+    }
+
+    .exp-title {
+      font-size: 5vw;
+    }
+
+    h2 {
+      margin-bottom: 0px;
+      margin-top: 2.5vw;
+    }
+
+    .exp-review-rating-radio{
+      margin-top: $gutter-sm;
+    }
+
+    .rating {
+      margin-left: $gutter-sm;
+    }
+
+    .exp-review-text-box {
+      margin-top: $gutter-sm;
+    }
+
+    textarea.day-description-box {
+      width: 90%;
+      height: 15vw;
+    }
+
+    button {
+      margin-top: $gutter-lg;
+      width: 15vw;
+      height: 6vw;
+      font-size: 3vw;
+    }
+  }
+
+  .exp-review-item {
+    margin-top: $gutter-sm;
+    border: 1px solid $color-darkgrey;
+    border-radius: $boarder-radius;
+
+    .exp-item-head {
+      width: 100%;
+      border-radius: $boarder-radius;
+      border-bottom: 2px solid $color-darkgrey;
+
+      p {
+        display: inline-block;
+        padding: $gutter-sm;
+        text-align: center;
+        font-size: 4vw;
+      }
+
+      .use-date{
+        width: 15%;
+        background: $color-darkgrey;
+        color: $color-white;
+      }
+
+      .edible-name {
+        width: 30%;
+        color: $color-black;
+        background: $color-lightgrey;
+        border-right: 1px solid $color-darkgrey;
+      }
+
+      .edible-thc {
+        width: 38%;
+      }
+    }
+
+    .exp-item-body {
+      font-size: 4vw;
+
+      p {
+        padding: $gutter-sm;
+      }
+    }
+
+    .delete-button {
+      color: $color-error;
+      background: $color-darkgrey;
+      margin-right: $gutter-sm;
+      float: right;
+      margin-bottom: $gutter-sm;
+      width: 15vw;
+      height: 6vw;
+      font-size: 3vw;
+    }
+
+    .edit-button {
+      color: $color-success;
+      background: $color-darkgrey;
+      margin-left: $gutter-sm;
+      float: left;
+      margin-bottom: $gutter-sm;
+      width: 15vw;
+      height: 6vw;
+      font-size: 3vw;
+    }
+  }
+}
