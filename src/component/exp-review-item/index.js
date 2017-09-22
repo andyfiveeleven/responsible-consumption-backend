@@ -51,8 +51,9 @@ export class ExpReviewItem extends React.Component {
               <p className='exp-rating'>Rating of Experience: {expReview.reaction} stars</p>
               <p className='meal-size'> Meal size: {expReview.lastMeal}/5</p>
               <p className='day-description'>Description of the day: {expReview.description}</p>
+              <p className='dosage'>Recomended dose of {expReview.edibleName} based on body weight and experience: {expReview.dosage *2.5}mg</p>
             </div>
-      
+
             <button onClick={() => this.setState({editing: true})} className='edit-button'>Edit</button>
             <button onClick={this.handleDelete} className='delete-button'>Delete</button>
             <div className='clearfix'></div>

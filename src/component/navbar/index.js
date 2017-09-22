@@ -88,14 +88,14 @@ class Navbar extends React.Component {
             </nav>
           </div>
         )}
-
+        <span className='clearfix'></span>
         </main>
 
         {util.renderIf(this.props.profile,
           <Avatar profile={this.props.profile} />)}
 
         {util.renderIf(this.props.loggedIn,
-          <button onClick={this.handleLogout}>logout</button>
+          <button className='logout' onClick={this.handleLogout}>logout</button>
         )}
 
         {util.renderIf(!this.props.loggedIn,
