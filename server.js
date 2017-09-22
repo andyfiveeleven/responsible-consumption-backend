@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 8080;
 
 app.use(express.static(`${__dirname}/build`));
 
-app.get('/*', ((req, res) => res.redirect('/')));
+app.get('/*', (req, res) => res.redirect('/'))
 
 app.listen(PORT, function(){
   console.log('server up:', PORT);

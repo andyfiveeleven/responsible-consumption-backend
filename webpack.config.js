@@ -12,7 +12,7 @@ let plugins = [
   new HTMLPlugin({template: `${__dirname}/src/index.html`}),
   new DefinePlugin({
     __DEBUG__: JSON.stringify(!production),
-    API_URL: JSON.stringify(process.env.API_URL),
+    __API_URL__: JSON.stringify(process.env.API_URL),
   }),
 ];
 if(production) plugins = plugins.concat([new CleanPlugin(), new UglifyPlugin()]);
