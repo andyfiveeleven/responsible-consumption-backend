@@ -150,17 +150,17 @@ class ExpReviewForm extends React.Component {
                     />
                 </div>
 
-                <div className='exp-review-rating-radio'>
+                <div className='exp-review-rating-radio tall'>
                   <h2>How much thc does your edible contain?</h2>
                   <Rating
                     name='edibleThc'
                     min={1}
                     max={5}
-                    label1='2.5mg'
-                    label2='5mg'
-                    label3='7.5mg'
-                    label4='10mg'
-                    label5='more than 10mg'
+                    label1='  2.5mg'
+                    label2='  5mg'
+                    label3='  7.5mg'
+                    label4='  10mg'
+                    label5='  more than 10mg'
                     onChange={(edibleThc) => this.setState({edibleThc})}
                     value={this.state.edibleThc}
                     />

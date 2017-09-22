@@ -4,13 +4,15 @@
 .rating {
  line-height: 1;
  display: inline-block;
+ margin-top: 2vw;
+ margin-bottom: 2vw;
 
  &__item {
    display: inline;
    font-size: 0;
 
    &::before {
-     font-size: 18px;
+     font-size: 5vw;
      letter-spacing: 5px;
      content: "★";
      color: lightgray;
@@ -28,7 +30,7 @@
 }
 
 span {
-  font-size: 3vw;
+  font-size: 4vw;
 }
 
 .rating:hover .rating__item::before {

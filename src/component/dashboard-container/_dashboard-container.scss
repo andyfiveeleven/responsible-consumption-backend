@@ -9,6 +9,18 @@
     border: 1.5px solid $color-darkgrey;
     background: $color-white;
 
+    input[type="text"] {
+      padding: 2.5vw;
+      font-size: 3vw;
+      width: 50vw;
+      margin: 0;
+      margin-top: 1vw;
+    }
+
+    .tall span {
+      font-size: 3vw;
+    }
+
     .exp-title {
       font-size: 5vw;
     }
@@ -36,7 +48,10 @@
     }
 
     button {
-      margin-top: $gutter-lg
+      margin-top: $gutter-lg;
+      width: 15vw;
+      height: 6vw;
+      font-size: 3vw;
     }
   }
 
@@ -89,6 +104,9 @@
       margin-right: $gutter-sm;
       float: right;
       margin-bottom: $gutter-sm;
+      width: 15vw;
+      height: 6vw;
+      font-size: 3vw;
     }
 
     .edit-button {
@@ -97,6 +115,9 @@
       margin-left: $gutter-sm;
       float: left;
       margin-bottom: $gutter-sm;
+      width: 15vw;
+      height: 6vw;
+      font-size: 3vw;
     }
   }
 }

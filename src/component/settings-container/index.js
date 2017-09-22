@@ -34,7 +34,6 @@ class SettingsContainer extends React.Component {
 
     return (
       <div className='settings-container'>
-        <h2>tell us about yourself</h2>
 
         <ProfileForm
           profile={this.props.profile}

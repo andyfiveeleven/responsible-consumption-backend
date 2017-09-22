@@ -1,9 +1,27 @@
 @import "vars";
 
+
 .navbar{
   background: linear-gradient(#31b1d1, #31a1ff);;
   color: white;
   height: 20vw;
+
+  div.lion{
+    width: 30%;
+    float: left;
+    font-size: 5vw;
+    padding: $gutter-lg;
+    background-image: url("./lion.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    z-index: 100;
+    background-color: (0,0,0,.5)
+  }
+
+  h1{
+    opacity: 1;
+  }
 
   a {
     color: $color-white;
@@ -28,12 +46,6 @@
     }
   }
 
-  h1 {
-    width: 30%;
-    float: left;
-    font-size: 5vw;
-    padding: $gutter-lg;
-  }
 
   .auth-form {
     float: right;

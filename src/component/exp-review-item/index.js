@@ -65,7 +65,7 @@ export class ExpReviewItem extends React.Component {
             <ExpReviewForm
               labelText='Edit your'
               expReview={this.props.expReview}
-              buttonText='update experience'
+              buttonText='update'
               onComplete={this.handleUpdate}
               />
           </div>
