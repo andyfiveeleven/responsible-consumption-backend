@@ -131,7 +131,7 @@ class CommentForm extends React.Component {
 
 
   edibleDoesExist(edibleSearch){
-    return superagent.get(`${__API_URL__}/api/edible/search/${edibleSearch}`)
+    return superagent.get(`${API_URL}/api/edible/search/${edibleSearch}`)
     .end((err, res) => {
       if(err) console.error(err);
       let edibleList = res.body;

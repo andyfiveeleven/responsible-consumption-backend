@@ -108,7 +108,7 @@ class SignupForm extends React.Component {
   }
 
   usernameCheckAvailable(username){
-    return superagent.get(`${__API_URL__}/usernames/${username}`)
+    return superagent.get(`${API_URL}/usernames/${username}`)
     .then(() => this.setState({usernameAvailable: false}))
     .catch(() => this.setState({usernameAvailable: true}))
   }
