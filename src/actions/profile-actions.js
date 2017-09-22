@@ -19,6 +19,7 @@ export const profileCreateRequest = (profile) => (dispatch) => {
   .set({Authorization: `Bearer ${token}`})
   .send(profile)
   .then((res) => {
+    console.log(res.body);
     dispatch(profileCreate(res.body))
     return res;
   });
