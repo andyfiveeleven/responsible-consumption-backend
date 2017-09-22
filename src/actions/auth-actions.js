@@ -20,13 +20,6 @@ export const signupRequest =  (user) => (dispatch) => {
   .withCredentials()
   .send(user)
   .then(res => {
-    dispatch(tokenSet(res.text))
-    // res.text === toke
-    try {
-      localStorage.token = res.text
-    } catch (error) {
-      console.log(error)
-    }
     return res
   })
 }
@@ -36,7 +29,6 @@ export const loginRequest = (user) => (dispatch) => {
   .withCredentials()
   .auth(user.username, user.password)
   .then(res => {
-    dispatch(tokenSet(res.text))
     return res
   })
 }
