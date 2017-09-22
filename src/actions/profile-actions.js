@@ -15,7 +15,7 @@ export const profileCreateRequest = (profile) => (dispatch) => {
   let token = document.cookie.split('=')[1];
 
   console.log('weeeeeeeeeeeeeeeeeeee', token);
-  return superagent.post(`${__API_URL__}/api/profile`)
+  return superagent.post(`${API_URL}/api/profile`)
   .set({Authorization: `Bearer ${token}`})
   .send(profile)
   .then((res) => {
@@ -26,7 +26,7 @@ export const profileCreateRequest = (profile) => (dispatch) => {
 
 export const userProfileUpdateRequest = (profile) => (dispatch, getState) => {
   let {auth} = getState()
-  return superagent.put(`${__API_URL__}/api/profiles/${profile._id}`)
+  return superagent.put(`${API_URL}/api/profiles/${profile._id}`)
   .set({Authorization: `Bearer ${auth}`})
   .field('bio', profile.bio)
   .attach('avatar', profile.avatar)
@@ -38,10 +38,10 @@ export const userProfileUpdateRequest = (profile) => (dispatch, getState) => {
 
 export const userProfileFetchRequest = () => (dispatch, getState) => {
   let token = document.cookie.split('=')[1];
-  return superagent.get(`${__API_URL__}/profile/me`)
+  return superagent.get(`${API_URL}/profile/me`)
   .set({Authorization: `Bearer ${token}`})
   .then(res => {
-    superagent.get(`${__API_URL__}/profile/${res.body.userID}`)
+    superagent.get(`${API_URL}/profile/${res.body.userID}`)
     .set({Authorization: `Bearer ${token}`})
     .then((profile) => {
       return profile

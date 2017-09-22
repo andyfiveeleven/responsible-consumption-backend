@@ -25,7 +25,7 @@ export const expReviewDelete = (expReview) => ({
 
 export const expReviewFetchRequest = () => (dispatch, getState) => {
   let token = document.cookie.split('=')[1];
-  return superagent.get(`${__API_URL__}/api/expReview/me`)
+  return superagent.get(`${API_URL}/api/expReview/me`)
   .set('Authorization', `Bearer ${token}`)
   .then(res => {
     dispatch(expReviewsSet(res.body))
@@ -36,7 +36,7 @@ export const expReviewFetchRequest = () => (dispatch, getState) => {
 export const expReviewCreateRequest = (expReview) => (dispatch, getState) => {
   let token = document.cookie.split('=')[1];
   console.log('ur posting')
-  return superagent.post(`${__API_URL__}/api/expReview`)
+  return superagent.post(`${API_URL}/api/expReview`)
   .set('Authorization', `Bearer ${token}`)
   .send(expReview)
   .then((res) => {
@@ -48,7 +48,7 @@ export const expReviewCreateRequest = (expReview) => (dispatch, getState) => {
 
 export const expReviewDeleteRequest = (expReview) => (dispatch, getState) => {
   let token = document.cookie.split('=')[1];
-  return superagent.delete(`${__API_URL__}/api/expReview/${expReview._id}`)
+  return superagent.delete(`${API_URL}/api/expReview/${expReview._id}`)
   .set('Authorization', `Bearer ${token}`)
   .then( res => {
     dispatch(expReviewDelete(expReview))
@@ -59,7 +59,7 @@ export const expReviewDeleteRequest = (expReview) => (dispatch, getState) => {
 export const expReviewUpdateRequest = (expReview) => (dispatch, getState) => {
   console.log('GET STATE', expReview);
   let token = document.cookie.split('=')[1];
-  return superagent.put(`${__API_URL__}/api/expReview/${expReview._id}`)
+  return superagent.put(`${API_URL}/api/expReview/${expReview._id}`)
   .set('Authorization', `Bearer ${token}`)
   .send(expReview)
   .then( res => {

@@ -12,7 +12,7 @@ export const cookieRemove = () => ({
 });
 
 export const signupRequest = (user) => (dispatch) => {
-  return superagent.post(`${__API_URL__}/api/signup`)
+  return superagent.post(`${API_URL}/api/signup`)
   .withCredentials()
   .then((res) => {
     // dispatch(cookieCreate(res.body))
@@ -26,7 +26,7 @@ export const signupRequest = (user) => (dispatch) => {
 };
 
 export const signinRequest = (user) => (dispatch) => {
-  return superagent.get(`${__API_URL__}/api/signin`)
+  return superagent.get(`${API_URL}/api/signin`)
   .withCredentials()
   .auth(user.username, user.password)
   .then((res) => {

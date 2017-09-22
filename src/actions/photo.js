@@ -23,7 +23,7 @@ export const userPhotoDelete = (photo) => ({
 
 export const userPhotosFetchRequest = (phoro) => (dispatch, getState) => {
   let {auth} = getState()
-  return superagent.get(`${__API_URL__}/photos/me`)
+  return superagent.get(`${API_URL}/photos/me`)
   .set('Authorization', `Bearer ${auth}`)
   .then(res => {
     dispatch(userPhotosSet(res.body.data))
@@ -33,7 +33,7 @@ export const userPhotosFetchRequest = (phoro) => (dispatch, getState) => {
 
 export const userPhotoCreateRequest = (photo) => (dispatch, getState) => {
   let {auth} = getState()
-  return superagent.post(`${__API_URL__}/photos`)
+  return superagent.post(`${API_URL}/photos`)
   .set('Authorization', `Bearer ${auth}`)
   .field('description', photo.description)
   .attach('photo', photo.photo)
@@ -45,7 +45,7 @@ export const userPhotoCreateRequest = (photo) => (dispatch, getState) => {
 
 export const userPhotoDeleteRequest = (photo) => (dispatch, getState) => {
   let {auth} = getState()
-  return superagent.delete(`${__API_URL__}/photos/${photo._id}`)
+  return superagent.delete(`${API_URL}/photos/${photo._id}`)
   .set('Authorization', `Bearer ${auth}`)
   .then(res => {
     dispatch(userPhotoDelete(photo))
@@ -55,7 +55,7 @@ export const userPhotoDeleteRequest = (photo) => (dispatch, getState) => {
 
 export const userPhotoUpdateRequest = (photo) => (dispatch, getState) => {
   let {auth} = getState()
-  return superagent.put(`${__API_URL__}/photos/${photo._id}`)
+  return superagent.put(`${API_URL}/photos/${photo._id}`)
   .set('Authorization', `Bearer ${auth}`)
   .field('description', photo.description)
   .attach('photo', photo.photo)
