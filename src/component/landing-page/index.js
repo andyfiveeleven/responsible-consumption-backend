@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link, Route, Redirect} from 'react-router-dom'
 
+
+import './_landing-page.scss';
 import SignupForm from '../forms/signup-form/index'
 import LoginForm from '../forms/login-form/index'
 import * as util from '../../lib/util.js'
@@ -42,7 +44,7 @@ class LoginContainer extends React.Component {
           onComplete={this.handleSignup}
           buttonText= 'Sign Up'
           />
-
+        <span className='clearfix'></span>
       </div>
     )
   }
