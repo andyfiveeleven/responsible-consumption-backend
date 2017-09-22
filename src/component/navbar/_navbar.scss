@@ -1,14 +1,64 @@
+@import "vars";
+
 .navbar{
   background: hsl(227, 10%, 10%);
   color: white;
+  height: 13vw;
+
+  a {
+    color: $color-white;
+    font-size: 3vw;
+  }
+
+  .logout{
+    float: right;
+    margin-right: 5vw;
+    font-size: 2.5vw;
+    margin-top: 4vw;
+  }
+
+  ul {
+    float: left;
+    margin-left: 10%;
+    margin-top: 5vw;
+
+    li a {
+      margin-left: $gutter-lg;
+      font-size: 3.5vw;
+    }
+  }
+
+  h1 {
+    width: 30%;
+    float: left;
+    font-size: 4vw;
+    padding: $gutter-sm;
+  }
+
+  .auth-form {
+    float: right;
+    width: 60%;
+    margin-top: 5vw;
+
+    input {
+      width: 35%;
+      height: $gutter-sm;
+      font-size: 2.5vw;
+    }
+
+    button{
+      margin-left: $gutter-sm;
+      height: 6vw;
+      width: 15vw;
+      font-size: 2.5vw;
+      padding: 1.25% 3.33333%
+    }
+  }
+
 }
 .navbar main, .navbar main h1, .panel, .panel nav, .panel nav ul, .panel nav ul li{
   display: inline;
 }
 .login{
   margin: .1vw .2vw !important;
-}
-#title{
-  font-size: 4vw;
-  padding-top: 5%;
 }
