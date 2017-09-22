@@ -22,7 +22,10 @@ export const profileCreateRequest = (profile) => (dispatch) => {
     console.log(res.body);
     dispatch(profileCreate(res.body))
     return res;
-  });
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 };
 
 export const userProfileUpdateRequest = (profile) => (dispatch, getState) => {
@@ -34,6 +37,9 @@ export const userProfileUpdateRequest = (profile) => (dispatch, getState) => {
   .then(res => {
     dispatch(userProfileCreate(res.body))
     return res
+  })
+  .catch((err) => {
+    console.log(err);
   })
 }
 
