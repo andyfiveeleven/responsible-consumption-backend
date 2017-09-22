@@ -21,7 +21,7 @@ export const signupRequest =  (user) => (dispatch) => {
   .withCredentials()
   .send(user)
   .then(res => {
-    dispatch(tokenSet(.res.text))
+    dispatch(tokenSet(res.text))
     return res
   })
 }
@@ -31,7 +31,7 @@ export const loginRequest = (user) => (dispatch) => {
   .withCredentials()
   .auth(user.username, user.password)
   .then(res => {
-    dispatch(tokenSet(.res.text))
+    dispatch(tokenSet(res.text))
     return res
   })
 }
