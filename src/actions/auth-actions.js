@@ -22,6 +22,9 @@ export const signupRequest =  (user) => (dispatch) => {
   .then(res => {
     return res
   })
+  .catch(err => {
+    console.error(err);
+  })
 }
 
 export const loginRequest = (user) => (dispatch) => {
@@ -30,5 +33,8 @@ export const loginRequest = (user) => (dispatch) => {
   .auth(user.username, user.password)
   .then(res => {
     return res
+  })
+  .catch(err => {
+    console.error(err);
   })
 }

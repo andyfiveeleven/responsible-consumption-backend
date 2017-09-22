@@ -22,7 +22,10 @@ export const signupRequest = (user) => (dispatch) => {
       console.error(err);
     }
     return res;
-  });
+  })
+  .catch(err => {
+    console.error(err);
+  })
 };
 
 export const signinRequest = (user) => (dispatch) => {
@@ -34,5 +37,8 @@ export const signinRequest = (user) => (dispatch) => {
     console.log(res);
     document.cookie = JSON.stringify(res.body)
     return res;
-  });
+  })
+  .catch(err => {
+    console.error(err);
+  })
 };

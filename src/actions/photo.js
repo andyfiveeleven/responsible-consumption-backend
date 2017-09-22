@@ -29,6 +29,9 @@ export const userPhotosFetchRequest = (phoro) => (dispatch, getState) => {
     dispatch(userPhotosSet(res.body.data))
     return res
   })
+  .catch(err => {
+    console.error(err);
+  })
 }
 
 export const userPhotoCreateRequest = (photo) => (dispatch, getState) => {
@@ -41,6 +44,9 @@ export const userPhotoCreateRequest = (photo) => (dispatch, getState) => {
     dispatch(userPhotoCreate(res.body))
     return res
   })
+  .catch(err => {
+    console.error(err);
+  })
 }
 
 export const userPhotoDeleteRequest = (photo) => (dispatch, getState) => {
@@ -50,6 +56,9 @@ export const userPhotoDeleteRequest = (photo) => (dispatch, getState) => {
   .then(res => {
     dispatch(userPhotoDelete(photo))
     return res
+  })
+  .catch(err => {
+    console.error(err);
   })
 }
 
@@ -62,5 +71,8 @@ export const userPhotoUpdateRequest = (photo) => (dispatch, getState) => {
   .then(res => {
     dispatch(userPhotoUpdate(res.body))
     return res
+  })
+  .catch(err => {
+    console.error(err);
   })
 }
