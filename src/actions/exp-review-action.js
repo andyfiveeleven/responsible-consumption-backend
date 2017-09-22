@@ -31,6 +31,9 @@ export const expReviewFetchRequest = () => (dispatch, getState) => {
     dispatch(expReviewsSet(res.body))
     return res.body
   })
+  .catch((err) => {
+    console.log(err);
+  })
 }
 
 export const expReviewCreateRequest = (expReview) => (dispatch, getState) => {
@@ -44,6 +47,9 @@ export const expReviewCreateRequest = (expReview) => (dispatch, getState) => {
     dispatch(expReviewCreate(res.body))
     return res
   })
+  .catch((err) => {
+    console.log(err);
+  })
 }
 
 export const expReviewDeleteRequest = (expReview) => (dispatch, getState) => {
@@ -53,6 +59,9 @@ export const expReviewDeleteRequest = (expReview) => (dispatch, getState) => {
   .then( res => {
     dispatch(expReviewDelete(expReview))
     return res
+  })
+  .catch((err) => {
+    console.log(err);
   })
 }
 
@@ -66,5 +75,8 @@ export const expReviewUpdateRequest = (expReview) => (dispatch, getState) => {
     console.log('RESBODY',res.body);
     dispatch(expReviewUpdate(res.body))
     return res
+  })
+  .catch((err) => {
+    console.log(err);
   })
 }

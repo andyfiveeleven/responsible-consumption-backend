@@ -24,6 +24,9 @@ export const signupRequest =  (user) => (dispatch) => {
     dispatch(tokenSet(res.text))
     return res
   })
+  .catch((err) => {
+    console.log(err);
+  })
 }
 
 export const loginRequest = (user) => (dispatch) => {
@@ -33,5 +36,8 @@ export const loginRequest = (user) => (dispatch) => {
   .then(res => {
     dispatch(tokenSet(res.text))
     return res
+  })
+  .catch((err) => {
+    console.log(err);
   })
 }
