@@ -76,8 +76,9 @@ class Navbar extends React.Component {
     return (
       <header className='navbar'>
         <main>
+        <div className='lion'>
         <h1 id='title'>Responsible Consumption</h1>
-
+        </div>
         {util.renderIf(this.props.loggedIn,
           <div className='panel'>
             <nav>

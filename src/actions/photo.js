@@ -31,7 +31,7 @@ export const userPhotosFetchRequest = (phoro) => (dispatch, getState) => {
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 }
 
 export const userPhotoCreateRequest = (photo) => (dispatch, getState) => {
@@ -46,7 +46,7 @@ export const userPhotoCreateRequest = (photo) => (dispatch, getState) => {
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 }
 
 export const userPhotoDeleteRequest = (photo) => (dispatch, getState) => {
@@ -59,7 +59,7 @@ export const userPhotoDeleteRequest = (photo) => (dispatch, getState) => {
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 }
 
 export const userPhotoUpdateRequest = (photo) => (dispatch, getState) => {
@@ -74,5 +74,5 @@ export const userPhotoUpdateRequest = (photo) => (dispatch, getState) => {
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 }

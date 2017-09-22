@@ -1,0 +1,28 @@
+@import "vars";
+
+.signup-form {
+  width: 60%;
+  float: right;
+  margin-top: 10vw;
+
+  h2 {
+    font-size: 5vw;
+    margin-bottom: $gutter-lg * 2 ;
+  }
+
+  input {
+    width: 50vw;
+    height: 5vw;
+    font-size: 3vw;
+    margin-bottom: $gutter-lg * 2 ;
+    padding: 2.5vw;
+
+  }
+
+  button {
+    height: 6vw;
+    width: 15vw;
+    font-size: 2.5vw;
+    margin-left: 5vw;
+  }
+}

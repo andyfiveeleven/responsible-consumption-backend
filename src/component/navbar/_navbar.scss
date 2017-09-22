@@ -1,9 +1,27 @@
 @import "vars";
 
+
 .navbar{
-  background: hsl(227, 10%, 10%);
+  background: linear-gradient(#31b1d1, #31a1ff);;
   color: white;
-  height: 13vw;
+  height: 20vw;
+
+  div.lion{
+    width: 30%;
+    float: left;
+    font-size: 5vw;
+    padding: $gutter-lg;
+    background-image: url("./lion.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    z-index: 100;
+    background-color: (0,0,0,.5)
+  }
+
+  h1{
+    opacity: 1;
+  }
 
   a {
     color: $color-white;
@@ -14,13 +32,13 @@
     float: right;
     margin-right: 5vw;
     font-size: 2.5vw;
-    margin-top: 4vw;
+    margin-top: 7vw;
   }
 
   ul {
     float: left;
-    margin-left: 10%;
-    margin-top: 5vw;
+    margin-left: 7.5%;
+    margin-top: 8vw;
 
     li a {
       margin-left: $gutter-lg;
@@ -28,17 +46,11 @@
     }
   }
 
-  h1 {
-    width: 30%;
-    float: left;
-    font-size: 4vw;
-    padding: $gutter-sm;
-  }
 
   .auth-form {
     float: right;
     width: 60%;
-    margin-top: 5vw;
+    margin-top: 7vw;
 
     input {
       width: 35%;

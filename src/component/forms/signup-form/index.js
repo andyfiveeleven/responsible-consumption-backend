@@ -156,7 +156,6 @@ class SignupForm extends React.Component {
           'error': this.state.error && this.state.submitted,
         })}>
 
-          <img src='http://localhost:8080/src/component/forms/signup-form/photo-1487552292919-eccbbd948cba.jpg' />
           <section>
             <h2>signup</h2>
             <div>

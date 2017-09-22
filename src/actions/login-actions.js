@@ -25,7 +25,7 @@ export const signupRequest = (user) => (dispatch) => {
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 };
 
 export const signinRequest = (user) => (dispatch) => {
@@ -40,5 +40,5 @@ export const signinRequest = (user) => (dispatch) => {
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 };

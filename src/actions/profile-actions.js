@@ -25,7 +25,7 @@ export const profileCreateRequest = (profile) => (dispatch) => {
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 };
 
 export const userProfileUpdateRequest = (profile) => (dispatch, getState) => {
@@ -40,7 +40,7 @@ export const userProfileUpdateRequest = (profile) => (dispatch, getState) => {
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 }
 
 export const userProfileFetchRequest = () => (dispatch, getState) => {
@@ -59,5 +59,8 @@ export const userProfileFetchRequest = () => (dispatch, getState) => {
   })
   .catch((err) => {
     console.log(err);
+  })
+  .catch(err => {
+    console.error(err);
   })
 }

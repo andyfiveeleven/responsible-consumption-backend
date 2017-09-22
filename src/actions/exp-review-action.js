@@ -33,7 +33,7 @@ export const expReviewFetchRequest = () => (dispatch, getState) => {
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 }
 
 export const expReviewCreateRequest = (expReview) => (dispatch, getState) => {
@@ -49,7 +49,7 @@ export const expReviewCreateRequest = (expReview) => (dispatch, getState) => {
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 }
 
 export const expReviewDeleteRequest = (expReview) => (dispatch, getState) => {
@@ -62,7 +62,7 @@ export const expReviewDeleteRequest = (expReview) => (dispatch, getState) => {
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 }
 
 export const expReviewUpdateRequest = (expReview) => (dispatch, getState) => {
@@ -78,5 +78,5 @@ export const expReviewUpdateRequest = (expReview) => (dispatch, getState) => {
   })
   .catch((err) => {
     console.log(err);
-  })
+  });
 }
