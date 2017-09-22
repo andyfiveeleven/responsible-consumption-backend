@@ -53,5 +53,11 @@ export const userProfileFetchRequest = () => (dispatch, getState) => {
     .then((profile) => {
       return profile
     })
+    .catch((err) => {
+      console.log(err);
+    })
+  })
+  .catch((err) => {
+    console.log(err);
   })
 }
