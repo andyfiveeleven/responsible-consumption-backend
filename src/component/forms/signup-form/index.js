@@ -3,16 +3,11 @@ import superagent from 'superagent'
 import {isEmail, isAlphanumeric, isAscii} from 'validator'
 import debounce from 'lodash/fp/debounce'
 
-import './_login.scss';
+import './_signup.scss';
 import Tooltip from '../../tooltip/index'
 import * as util from '../../../lib/util'
-import {connect} from 'react-redux';
-import {Redirect} from 'react-router';
 
-import {signupRequest} from '../../../actions/login-actions.js';
-
-
-class LoginForm extends React.Component {
+class SignupForm extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -33,6 +28,7 @@ class LoginForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.handleFocus = this.handleFocus.bind(this)
+    this.usernameCheckAvailable = debounce(50)(this.usernameCheckAvailable.bind(this))
   }
 
   validateInput(e){
@@ -105,9 +101,17 @@ class LoginForm extends React.Component {
     this.setState({
       [name]: value,
     })
+
+    if(this.props.auth === 'signup' && name === 'username'){
+      this.usernameCheckAvailable(value)
+    }
   }
 
-
+  usernameCheckAvailable(username){
+    return superagent.get(`${API_URL}/usernames/${username}`)
+    .then(() => this.setState({usernameAvailable: false}))
+    .catch(() => this.setState({usernameAvailable: true}))
+  }
 
   handleSubmit(e){
     e.preventDefault()
@@ -148,38 +152,64 @@ class LoginForm extends React.Component {
       <form
         onSubmit={this.handleSubmit}
         className={util.classToggler({
-          'auth-form': true,
+          'signup-form': true,
           'error': this.state.error && this.state.submitted,
         })}>
-        <div>
 
-          <input
-            className='login'
-            type='text'
-            name='username'
-            placeholder='username'
-            value={this.state.username}
-            onChange={this.handleChange}
-            onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
-            />
-        </div>
+          <section>
+            <h2>signup</h2>
+            <div>
+              <Tooltip message={emailError} show={focused === 'email' || submitted} />
+              <input
+                className={util.classToggler({error: emailError})}
+                type='text'
+                name='email'
+                placeholder='email'
+                value={this.state.email}
+                onChange={this.handleChange}
+                onFocus={this.handleFocus}
+                onBlur={this.handleBlur}
+                />
+            </div>
 
-        <div>
+          {util.renderIf(this.props.auth === 'login',
+            <div>
+              <h2>login</h2>
+            </div>
+          )}
+          <div>
+            <Tooltip message={usernameError} show={focused === 'username' || submitted}/>
+            <input
+              className={util.classToggler({error: usernameError || !usernameAvailable})}
+              type='text'
+              name='username'
+              placeholder='username'
+              value={this.state.username}
+              onChange={this.handleChange}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur}
+              />
+            {util.renderIf(username,
+              <p className='username-available'>
+                {username} {usernameAvailable ? 'available': 'not available'}
+              </p>
+            )}
+          </div>
 
-          <input
-            className='login'
-            type='password'
-            name='password'
-            placeholder='password'
-            value={this.state.password}
-            onChange={this.handleChange}
-            onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
-            />
-        </div>
-
-
+          <div>
+            <Tooltip message={passwordError} show={ focused === 'password' || submitted}/>
+            <input
+              className={util.classToggler({passwordError})}
+              type='password'
+              name='password'
+              placeholder='password'
+              value={this.state.password}
+              onChange={this.handleChange}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur}
+              />
+            </div>
+          </section>
 
           <button type='submit'>
             {this.props.buttonText}
@@ -190,4 +220,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm
+export default SignupForm
